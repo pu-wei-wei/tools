@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" href="icon-192.png"><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#2F5D50"><meta name="apple-mobile-web-app-title" content="紅包行情">
+<title>紅包行情計算｜喜酒、過年、滿月、白包包多少？｜噗微微</title>
+<meta name="description" content="免費紅包行情計算：喝喜酒、喜帖人沒到、過年紅包、滿月、白包，依關係和場合建議金額，附吉利數字和禁忌。">
+<meta property="og:title" content="紅包行情計算｜喜酒、過年、滿月、白包包多少？">
+<style>
+:root{--main:#2F5D50;--sand:#D99A4E;--bg:#F7F1E7;--line:#E8E0D2;--ink:#23323D;--mute:#7A8790;--g:#2E8B57;--g2:#E3F2E9;--r:#D0453A;--r2:#FBE6E3}
+*{box-sizing:border-box}html,body{margin:0}body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.6}
+button,input,select{font:inherit}button{cursor:pointer}
+header{background:var(--main);color:#fff;padding:22px 18px 26px;position:relative;overflow:hidden}header:after{content:"";position:absolute;right:-55px;top:-55px;width:170px;height:170px;border-radius:50%;background:var(--sand);opacity:.9}
+header>*{position:relative;z-index:1;max-width:760px;margin:0 auto}.by{font-size:12px;color:#CFE2D8;letter-spacing:1px}h1{font-size:25px;margin:4px 0}header p{margin:0;color:#DDEBE3;font-size:14px}
+main{max-width:760px;margin:0 auto;padding:16px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px}h2{font-size:18px;margin:0 0 12px}
+label{display:block;font-size:13px;color:var(--mute);font-weight:700;margin-bottom:4px}
+input,select{width:100%;padding:11px 12px;border:1px solid #DDD5C6;border-radius:10px;background:#FFFDF9;color:var(--ink);font-size:16px}input:focus,select:focus{outline:2px solid var(--sand);border-color:var(--sand)}
+.btn{display:inline-block;border:0;border-radius:12px;padding:11px 16px;font-weight:800;text-decoration:none;background:var(--main);color:#fff;font-size:15px}.btn.sand{background:var(--sand);color:#2A1E10}.btn.ghost{background:#EFE9DF;color:var(--ink)}.btn.sm{padding:6px 10px;font-size:13px;border-radius:8px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.grow{flex:1;min-width:0}
+.tag{display:inline-flex;align-items:center;gap:6px;background:#EFE9DF;border-radius:99px;padding:5px 6px 5px 12px;font-size:14px}.tag button{border:0;background:#fff;border-radius:50%;width:22px;height:22px;font-size:12px;line-height:1}
+.f{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.full{grid-column:1/-1}
+.who{display:flex;flex-wrap:wrap;gap:6px}.who label{display:flex;align-items:center;gap:5px;font-weight:400;color:var(--ink);background:#F7F4EE;border-radius:99px;padding:5px 12px;margin:0;font-size:14px}.who input{width:auto}
+.item{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px dashed var(--line);font-size:14.5px}.item:last-child{border:0}.item small{color:var(--mute);display:block}
+.pp{display:grid;grid-template-columns:1fr auto auto auto;gap:4px 12px;font-size:14.5px;align-items:center}.pp .h{font-size:12px;color:var(--mute);font-weight:700}.pp .n{text-align:right;font-variant-numeric:tabular-nums}
+.pos{color:var(--g);font-weight:800}.neg{color:var(--r);font-weight:800}
+.tr{background:var(--g2);border-radius:12px;padding:12px 14px;margin-top:8px;font-size:16px}.tr b{font-size:18px}
+.cta{background:linear-gradient(135deg,var(--main),#3E7565);color:#fff;border:0}.cta h2{color:#fff}.cta p{margin:0 0 12px;color:#E1EEE7;font-size:14.5px}
+.note{font-size:12.5px;color:var(--mute);line-height:1.7}footer{text-align:center;font-size:12.5px;color:var(--mute);padding:6px 16px 30px}footer a{color:var(--main)}
+.empty{color:var(--mute);text-align:center;padding:14px;font-size:14px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--main);color:#fff;padding:11px 18px;border-radius:12px;font-size:14px;display:none;z-index:9}
+@media(max-width:560px){header:after{width:120px!important;height:120px!important;right:-50px!important;top:-58px!important}header p{padding-right:30px}}
+
+label.l{display:block;font-size:13px;color:var(--mute);font-weight:700;margin:6px 0 6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}.chip{border:1px solid var(--line);background:#FAF7F2;border-radius:99px;padding:7px 13px;font-size:14px;color:var(--ink)}.chip.on{background:var(--main);border-color:var(--main);color:#fff}
+.big{font-size:30px;font-weight:900;color:var(--main);background:var(--g2);border-radius:14px;padding:14px 16px}
+.tip{background:#FBF3E4;border-radius:12px;padding:10px 14px;font-size:14px;margin-top:12px;line-height:1.7}
+.res3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.box{border-radius:14px;padding:12px;background:#F7F4EE}.box .k{font-size:12.5px;color:var(--mute)}.box .v{font-size:20px;font-weight:900;margin-top:2px}.box.save{background:var(--g2)}.box.save .v{color:var(--g)}
+#sum.big{font-size:15.5px;font-weight:400;color:#1E6B42}#sum b{font-size:17px}
+@media(max-width:560px){.res3{grid-template-columns:minmax(0,1fr)}header:after{width:120px!important;height:120px!important;right:-50px!important;top:-58px!important}header p{padding-right:30px}}
+</style>
+</head>
+<body>
+<header><div class="by">噗微微・免費實用小工具</div><h1>紅包行情計算</h1><p>喜酒、過年、滿月、白包，包多少才得體？選一選就有建議。</p></header>
+<main>
+ <section class="card">
+  <h2>① 什麼場合？</h2>
+  <div class="chips" id="occ"></div>
+  <div id="opts"></div>
+ </section>
+ <section class="card">
+  <h2>② 建議金額</h2>
+  <div class="big" id="range"></div>
+  <div class="note" id="why" style="margin-top:6px"></div>
+  <div style="margin-top:14px;font-weight:800;font-size:14px">常見吉利金額（點選複製）</div>
+  <div class="chips" id="lucky" style="margin-top:6px"></div>
+  <div class="tip" id="taboo"></div>
+  <div class="row" style="margin-top:14px"><button class="btn" onclick="copyResult()">📋 複製建議</button><button class="btn ghost" onclick="share()">🔗 分享給家人</button></div>
+ </section>
+ <section class="card cta">
+  <h2>每年紅包、禮金到底花了多少？</h2>
+  <p>「2027 家庭記帳本」有「紅包禮金」分類，月報表、年度總覽自動統計，一年人情支出一目了然。</p>
+  <a class="btn sand" href="https://portaly.cc/lifejuice_taiwan" target="_blank" rel="noopener">看噗微微的實用模板 →</a>
+ </section>
+ <p class="note">※ 建議金額整理自常見的社會習俗，各地、各家庭的習慣不同，請以自己的關係、預算和長輩的意見為準。僅供參考。</p>
+</main>
+<details class="a2hs" style="max-width:760px;margin:0 auto 14px;padding:0 16px"><summary style="background:#fff;border:1px solid #E8E0D2;border-radius:16px;padding:14px 18px;font-weight:800;cursor:pointer">📱 加到手機主畫面，下次一點就開</summary><div style="background:#fff;border:1px solid #E8E0D2;border-top:0;border-radius:0 0 16px 16px;padding:4px 18px 16px;font-size:14.5px;line-height:1.8;margin-top:-10px">
+<b>iPhone（Safari）</b><br>1. 用 Safari 打開這一頁<br>2. 點下方的「分享」按鈕（方框加向上箭頭）<br>3. 往下滑，點「加入主畫面」→ 右上角「新增」<br><br>
+<b>Android（Chrome）</b><br>1. 用 Chrome 打開這一頁<br>2. 點右上角「⋮」<br>3. 點「加到主畫面」或「安裝應用程式」→「新增」<br><br>
+<span style="color:#7A8790;font-size:13px">從 LINE、Facebook 點開的話，先點右上角選單「用瀏覽器開啟」，才看得到這些選項。</span></div></details>
+<footer>追蹤噗微微，每天一則實用資訊<br><a href="https://portaly.cc/lifejuice_taiwan" target="_blank" rel="noopener">抖音・Facebook・Instagram・YouTube 都在這裡</a></footer>
+<div class="toast" id="toast"></div>
+<script>
+const $=id=>document.getElementById(id);const nf=x=>Math.round(x).toLocaleString('zh-TW');
+const OCC=[['wed','💒 喝喜酒'],['wedno','💌 喜帖人沒到'],['cny','🧧 過年紅包'],['baby','👶 滿月／彌月'],['bday','🎂 長輩生日'],['house','🏠 入厝喬遷'],['fun','🕊 白包（奠儀）']];
+const REL={close:'家人親戚',best:'好朋友',coll:'同事',fr:'普通朋友',boss:'主管長輩'};
+let st={occ:'wed',rel:'fr',ppl:'1',venue:'normal',cnyTo:'kid',age:'small',income:'mid'};
+const LUCKY_HAPPY=[600,800,1000,1200,1600,1800,2000,2200,2600,2800,3200,3600,4200,5200,6000,6600,8000,8800,10000,12000,16000,20000];
+const LUCKY_FUN=[500,700,900,1100,1300,1500,2100,3100,5100];
+function opt(id,label,arr){return `<label class="l">${label}</label><div class="chips">`+arr.map(([v,t])=>`<button class="chip ${st[id]===v?'on':''}" onclick="setv('${id}','${v}')">${t}</button>`).join('')+'</div>'}
+function setv(k,v){st[k]=v;render()}
+function calc(){const o=st.occ;let lo,hi,why='',happy=true;
+ const base={close:[3600,6600],best:[2200,3600],coll:[1600,2200],fr:[1600,2000],boss:[2000,3200]}[st.rel];
+ if(o==='wed'){[lo,hi]=base;if(st.venue==='hotel'){lo+=600;hi+=1000;why='飯店喜宴成本較高，多包一些。'}else why='一般餐廳喜宴。';
+  if(st.ppl==='2'){lo=Math.round(lo*1.7/200)*200;hi=Math.round(hi*1.8/200)*200;why+='兩個人出席，大約包一個人的 1.7～1.8 倍。'}
+  if(st.ppl==='fam'){lo=Math.round(lo*2.4/200)*200;hi=Math.round(hi*2.8/200)*200;why+='攜家帶眷，依人數增加，小孩可少算一點。'}}
+ else if(o==='wedno'){[lo,hi]={close:[2000,3600],best:[1600,2200],coll:[600,1200],fr:[600,1200],boss:[1200,2000]}[st.rel];why='沒有出席不用負擔餐費，大多包出席金額的一半左右，或只送祝福。'}
+ else if(o==='cny'){if(st.cnyTo==='kid'){[lo,hi]={small:[600,1200],mid:[1000,2000],big:[1200,3600]}[st.age];why='依小孩年紀、跟你的親疏調整；自己的小孩或很親的姪甥可再多一些。'}
+  else if(st.cnyTo==='parent'){[lo,hi]={low:[3600,6600],mid:[6600,12000],high:[12000,20000]}[st.income];why='給父母沒有標準，大多依自己的收入；有的家庭是兄弟姊妹先講好一樣的金額。'}
+  else{[lo,hi]=[1200,3600];why='給阿公阿嬤、長輩，心意比金額重要。'}}
+ else if(o==='baby'){[lo,hi]={close:[2000,3600],best:[1200,2200],coll:[600,1200],fr:[600,1200],boss:[1200,2000]}[st.rel];why='收到彌月蛋糕或油飯，常見回禮是包紅包或送嬰兒用品。'}
+ else if(o==='bday'){[lo,hi]={close:[2000,6600],best:[1200,2200],coll:[600,1200],fr:[600,1200],boss:[1200,3600]}[st.rel];why='長輩做壽，一般用紅包寫「壽」；整數大壽可以多包一點。'}
+ else if(o==='house'){[lo,hi]={close:[2000,3600],best:[1200,2200],coll:[600,1200],fr:[600,1200],boss:[1200,2000]}[st.rel];why='入厝也可以送實用小家電、盆栽代替紅包。'}
+ else if(o==='fun'){happy=false;[lo,hi]={close:[2100,5100],best:[1100,2100],coll:[500,1100],fr:[500,1100],boss:[1100,2100]}[st.rel];why='奠儀習俗上包單數（奇數），用白色信封。'}
+ return{lo,hi,why,happy}}
+function render(){$('occ').innerHTML=OCC.map(([v,t])=>`<button class="chip ${st.occ===v?'on':''}" onclick="setv('occ','${v}')">${t}</button>`).join('');
+ let h='';const relOpts=Object.entries(REL);
+ if(st.occ==='cny'){h+=opt('cnyTo','給誰',[['kid','小孩'],['parent','爸媽'],['elder','阿公阿嬤／長輩']]);
+  if(st.cnyTo==='kid')h+=opt('age','小孩年紀',[['small','學齡前'],['mid','國小'],['big','國高中以上']]);
+  if(st.cnyTo==='parent')h+=opt('income','自己的月收入',[['low','4 萬以下'],['mid','4～7 萬'],['high','7 萬以上']])}
+ else{h+=opt('rel','你們的關係',relOpts);if(st.occ==='wed'){h+=opt('ppl','出席人數',[['1','1 人'],['2','2 人'],['fam','攜家帶眷']])+opt('venue','喜宴地點',[['normal','一般餐廳'],['hotel','飯店']])}}
+ $('opts').innerHTML=h;
+ const r=calc();$('range').innerHTML=`${nf(r.lo)} ～ ${nf(r.hi)} <span style="font-size:16px">元</span>`;$('why').textContent=r.why;
+ const L=(r.happy?LUCKY_HAPPY:LUCKY_FUN).filter(x=>x>=r.lo*0.85&&x<=r.hi*1.15);
+ $('lucky').innerHTML=L.map(x=>`<button class="chip" onclick="copyText('${nf(x)}')">${nf(x)}</button>`).join('');
+ $('taboo').innerHTML=r.happy?'💡 喜事包<b>偶數</b>，避開有「4」的金額（例如 400、1,400、4,000）；用紅色紅包袋，鈔票用新鈔、朝同一面。':'💡 白包包<b>單數</b>（奇數），避開偶數；用白色或素色信封，不要用新鈔，也不用寫祝賀字。'}
+function toast(t){const e=$('toast');e.textContent=t;e.style.display='block';clearTimeout(e._t);e._t=setTimeout(()=>e.style.display='none',2200)}
+function copyText(t){const a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();let ok=false;try{ok=document.execCommand('copy')}catch(e){}a.remove();if(!ok&&navigator.clipboard)navigator.clipboard.writeText(t).then(()=>toast('已複製'));else toast(ok?'已複製 '+(t.length<10?t:''):'複製失敗')}
+function copyResult(){const r=calc();const occ=OCC.find(o=>o[0]===st.occ)[1].slice(2);copyText(`【${occ}紅包建議】\n建議 ${nf(r.lo)}～${nf(r.hi)} 元\n${r.why}\n${$('taboo').textContent}\n\n用「噗微微紅包行情計算」查的：${location.href}`)}
+function share(){if(navigator.share)navigator.share({title:document.title,url:location.href}).catch(()=>{});else copyText(location.href)}
+render();
+</script>
+</body>
+</html>

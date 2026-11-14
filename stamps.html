@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" href="icon-192.png"><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#2F5D50"><meta name="apple-mobile-web-app-title" content="集點卡">
+<title>孩子集點卡產生器｜免費列印好習慣集點卡｜噗微微</title>
+<meta name="description" content="免費孩子集點卡產生器：填名字、目標、獎勵，選格數和圖案，一鍵列印 A4，培養刷牙、收玩具、閱讀等好習慣。">
+<meta property="og:title" content="孩子集點卡產生器｜免費列印好習慣集點卡">
+<style>
+:root{--main:#2F5D50;--sand:#D99A4E;--bg:#F7F1E7;--line:#E8E0D2;--ink:#23323D;--mute:#7A8790;--g:#2E8B57;--g2:#E3F2E9;--r:#D0453A;--r2:#FBE6E3}
+*{box-sizing:border-box}html,body{margin:0}body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.6}
+button,input,select{font:inherit}button{cursor:pointer}
+header{background:var(--main);color:#fff;padding:22px 18px 26px;position:relative;overflow:hidden}header:after{content:"";position:absolute;right:-55px;top:-55px;width:170px;height:170px;border-radius:50%;background:var(--sand);opacity:.9}
+header>*{position:relative;z-index:1;max-width:760px;margin:0 auto}.by{font-size:12px;color:#CFE2D8;letter-spacing:1px}h1{font-size:25px;margin:4px 0}header p{margin:0;color:#DDEBE3;font-size:14px}
+main{max-width:760px;margin:0 auto;padding:16px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px}h2{font-size:18px;margin:0 0 12px}
+label{display:block;font-size:13px;color:var(--mute);font-weight:700;margin-bottom:4px}
+input,select{width:100%;padding:11px 12px;border:1px solid #DDD5C6;border-radius:10px;background:#FFFDF9;color:var(--ink);font-size:16px}input:focus,select:focus{outline:2px solid var(--sand);border-color:var(--sand)}
+.btn{display:inline-block;border:0;border-radius:12px;padding:11px 16px;font-weight:800;text-decoration:none;background:var(--main);color:#fff;font-size:15px}.btn.sand{background:var(--sand);color:#2A1E10}.btn.ghost{background:#EFE9DF;color:var(--ink)}.btn.sm{padding:6px 10px;font-size:13px;border-radius:8px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.grow{flex:1;min-width:0}
+.tag{display:inline-flex;align-items:center;gap:6px;background:#EFE9DF;border-radius:99px;padding:5px 6px 5px 12px;font-size:14px}.tag button{border:0;background:#fff;border-radius:50%;width:22px;height:22px;font-size:12px;line-height:1}
+.f{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.full{grid-column:1/-1}
+.who{display:flex;flex-wrap:wrap;gap:6px}.who label{display:flex;align-items:center;gap:5px;font-weight:400;color:var(--ink);background:#F7F4EE;border-radius:99px;padding:5px 12px;margin:0;font-size:14px}.who input{width:auto}
+.item{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px dashed var(--line);font-size:14.5px}.item:last-child{border:0}.item small{color:var(--mute);display:block}
+.pp{display:grid;grid-template-columns:1fr auto auto auto;gap:4px 12px;font-size:14.5px;align-items:center}.pp .h{font-size:12px;color:var(--mute);font-weight:700}.pp .n{text-align:right;font-variant-numeric:tabular-nums}
+.pos{color:var(--g);font-weight:800}.neg{color:var(--r);font-weight:800}
+.tr{background:var(--g2);border-radius:12px;padding:12px 14px;margin-top:8px;font-size:16px}.tr b{font-size:18px}
+.cta{background:linear-gradient(135deg,var(--main),#3E7565);color:#fff;border:0}.cta h2{color:#fff}.cta p{margin:0 0 12px;color:#E1EEE7;font-size:14.5px}
+.note{font-size:12.5px;color:var(--mute);line-height:1.7}footer{text-align:center;font-size:12.5px;color:var(--mute);padding:6px 16px 30px}footer a{color:var(--main)}
+.empty{color:var(--mute);text-align:center;padding:14px;font-size:14px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--main);color:#fff;padding:11px 18px;border-radius:12px;font-size:14px;display:none;z-index:9}
+@media(max-width:560px){header:after{width:120px!important;height:120px!important;right:-50px!important;top:-58px!important}header p{padding-right:30px}}
+
+label.l{display:block;font-size:13px;color:var(--mute);font-weight:700;margin:6px 0 6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}.chip{border:1px solid var(--line);background:#FAF7F2;border-radius:99px;padding:7px 13px;font-size:14px;color:var(--ink)}.chip.on{background:var(--main);border-color:var(--main);color:#fff}
+.big{font-size:30px;font-weight:900;color:var(--main);background:var(--g2);border-radius:14px;padding:14px 16px}
+.tip{background:#FBF3E4;border-radius:12px;padding:10px 14px;font-size:14px;margin-top:12px;line-height:1.7}
+.res3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.box{border-radius:14px;padding:12px;background:#F7F4EE}.box .k{font-size:12.5px;color:var(--mute)}.box .v{font-size:20px;font-weight:900;margin-top:2px}.box.save{background:var(--g2)}.box.save .v{color:var(--g)}
+#sum.big{font-size:15.5px;font-weight:400;color:#1E6B42}#sum b{font-size:17px}
+@media(max-width:560px){.res3{grid-template-columns:minmax(0,1fr)}header:after{width:120px!important;height:120px!important;right:-50px!important;top:-58px!important}header p{padding-right:30px}}
+.sc{border:3px solid var(--c);border-radius:1.2em;padding:1em 1.1em;background:#fff;font-family:inherit}.sc-h{background:var(--c);color:#fff;border-radius:.8em;padding:.6em .9em;margin-bottom:.8em}.sc-t{font-size:1.5em;font-weight:900}.sc-g{font-size:1em;opacity:.95}
+.sc-grid{display:grid;gap:.45em}.sc-cell{aspect-ratio:1;border:2px dashed var(--c);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--c);font-weight:800;opacity:.8;font-size:.95em}
+.sc-p{margin-top:.8em;font-size:1.1em;color:var(--ink)}.sc-p b{color:var(--c)}.sc-f{margin-top:.5em;font-size:.8em;color:#888}
+#print{display:none}
+@media print{@page{size:A4;margin:10mm}body{background:#fff}.noprint,.a2hs,footer,.toast{display:none!important}main{padding:0;max-width:none}#print{display:grid;gap:8mm}#print.pp-1{grid-template-columns:1fr}#print.pp-2{grid-template-columns:1fr}#print.pp-2 .sc{width:58%;margin:0 auto}#print.pp-1 .sc{width:92%;margin:0 auto}#print.pp-4{grid-template-columns:1fr 1fr}.sc{break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<header class="noprint"><div class="by">噗微微・免費實用小工具</div><h1>孩子集點卡產生器</h1><p>填名字、目標和獎勵，印出來貼冰箱，做到一次蓋一格。</p></header>
+<main>
+ <section class="card noprint">
+  <h2>① 設定集點卡</h2>
+  <div class="f">
+   <div><label>孩子的名字</label><input id="name" value="小寶" maxlength="10"></div>
+   <div><label>格數</label><select id="cells"><option>10</option><option selected>20</option><option>30</option></select></div>
+   <div class="full"><label>要養成的習慣／目標</label><input id="goal" value="自己刷牙、收玩具" maxlength="24"></div>
+   <div class="full"><label>集滿的獎勵</label><input id="prize" value="週末去公園野餐" maxlength="24"></div>
+  </div>
+  <div class="chips" id="goalChips" style="margin-top:8px"></div>
+  <label class="l" style="margin-top:6px">圖案</label><div class="chips" id="icons"></div>
+  <label class="l">主題色</label><div class="chips" id="colors"></div>
+  <label class="l">一張 A4 印幾張</label><div class="chips" id="per"></div>
+ </section>
+ <section class="card noprint"><h2>② 預覽</h2><div id="preview"></div>
+  <div class="row" style="margin-top:14px"><button class="btn sand" onclick="window.print()">🖨 列印</button><button class="btn ghost" onclick="share()">🔗 分享給其他爸媽</button></div>
+  <div class="note" style="margin-top:8px">手機列印：點「列印」後選擇印表機，或選「儲存為 PDF」再拿去超商列印。</div>
+ </section>
+ <div id="print"></div>
+ <section class="card cta noprint">
+  <h2>家裡的錢也想一起整理？</h2>
+  <p>「2027 家庭記帳本」記一筆，月報表、孩子教育費、夫妻分帳自動算好。</p>
+  <a class="btn sand" href="https://portaly.cc/lifejuice_taiwan" target="_blank" rel="noopener">看噗微微的實用模板 →</a>
+ </section>
+ <p class="note noprint">※ 小建議：目標寫成「做得到的具體行為」（例如「睡前收好玩具」），比「要乖」更容易堅持；獎勵可以是陪伴，不一定要買東西。</p>
+</main>
+<details class="a2hs noprint" style="max-width:760px;margin:0 auto 14px;padding:0 16px"><summary style="background:#fff;border:1px solid #E8E0D2;border-radius:16px;padding:14px 18px;font-weight:800;cursor:pointer">📱 加到手機主畫面，下次一點就開</summary><div style="background:#fff;border:1px solid #E8E0D2;border-top:0;border-radius:0 0 16px 16px;padding:4px 18px 16px;font-size:14.5px;line-height:1.8;margin-top:-10px">
+<b>iPhone（Safari）</b><br>1. 用 Safari 打開這一頁<br>2. 點下方的「分享」按鈕（方框加向上箭頭）<br>3. 往下滑，點「加入主畫面」→ 右上角「新增」<br><br>
+<b>Android（Chrome）</b><br>1. 用 Chrome 打開這一頁<br>2. 點右上角「⋮」<br>3. 點「加到主畫面」或「安裝應用程式」→「新增」<br><br>
+<span style="color:#7A8790;font-size:13px">從 LINE、Facebook 點開的話，先點右上角選單「用瀏覽器開啟」，才看得到這些選項。</span></div></details>
+<footer class="noprint">追蹤噗微微，每天一則實用資訊<br><a href="https://portaly.cc/lifejuice_taiwan" target="_blank" rel="noopener">抖音・Facebook・Instagram・YouTube 都在這裡</a></footer>
+<div class="toast" id="toast"></div>
+<script>
+const $=id=>document.getElementById(id);
+const ICONS=['⭐','🌟','🍎','🚗','🦖','🌸','🐶','🚀','⚽','🎀'];const COLORS=[['#2F5D50','綠'],['#E8654F','珊瑚'],['#3B82C4','藍'],['#D99A4E','橘'],['#9B6BC3','紫'],['#E26D9A','粉']];
+const GOALS=['自己刷牙','收好玩具','準時睡覺','寫完功課','不挑食','自己穿衣服','幫忙做家事','每天閱讀 15 分鐘'];
+let st={icon:'⭐',color:'#2F5D50',per:'2'};
+function chips(id,arr,key,fmt){$(id).innerHTML=arr.map(v=>{const val=Array.isArray(v)?v[0]:v;return`<button class="chip ${st[key]===val?'on':''}" onclick="st.${key}='${val}';render()">${fmt?fmt(v):val}</button>`}).join('')}
+function card(scale){const n=+$('cells').value,cols=n===10?5:n===20?5:6;const name=$('name').value||'小寶',goal=$('goal').value||'',prize=$('prize').value||'';const c=st.color;
+ return`<div class="sc" style="--c:${c};font-size:${scale}px"><div class="sc-h"><div class="sc-t">${esc(name)} 的集點卡 ${st.icon}</div><div class="sc-g">目標：${esc(goal)}</div></div>
+ <div class="sc-grid" style="grid-template-columns:repeat(${cols},1fr)">${Array.from({length:n},(_,i)=>`<div class="sc-cell"><span>${i+1}</span></div>`).join('')}</div>
+ <div class="sc-p">🎁 集滿 ${n} 格：<b>${esc(prize)}</b></div><div class="sc-f">開始日期：＿＿＿＿＿＿　完成日期：＿＿＿＿＿＿</div></div>`}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function render(){chips('icons',ICONS,'icon');chips('colors',COLORS,'color',v=>`<span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:${v[0]};vertical-align:-1px"></span> ${v[1]}`);chips('per',[['1','1 張（大）'],['2','2 張'],['4','4 張（小）']].map(x=>x),'per',v=>v[1]);
+ $('goalChips').innerHTML=GOALS.map(g=>`<button class="chip" onclick="$('goal').value='${g}';render()">${g}</button>`).join('');
+ $('preview').innerHTML=card(15);const per=+st.per;$('print').className='pp-'+per;$('print').innerHTML=Array.from({length:per},()=>card(per===1?20:per===2?15:10)).join('')}
+function toast(t){const e=$('toast');e.textContent=t;e.style.display='block';clearTimeout(e._t);e._t=setTimeout(()=>e.style.display='none',2200)}
+function share(){if(navigator.share)navigator.share({title:document.title,url:location.href}).catch(()=>{});else{const a=document.createElement('textarea');a.value=location.href;document.body.appendChild(a);a.select();try{document.execCommand('copy');toast('已複製網址')}catch(e){}a.remove()}}
+document.querySelectorAll('input,select').forEach(e=>e.addEventListener('input',render));render();
+</script>
+</body>
+</html>
