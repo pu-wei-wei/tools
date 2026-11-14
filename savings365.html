@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" href="icon-192.png"><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#2F5D50"><meta name="apple-mobile-web-app-title" content="存錢罐">
+<title>365 天存錢罐｜每天存 1～365 元，一年存 66,795 元｜噗微微</title>
+<meta name="description" content="免費 365 天存錢挑戰：每天挑一個 1 到 365 的數字存進去，點格子打勾，自動算出已存金額。手頭緊挑小的、手頭鬆挑大的，一年存下 66,795 元。">
+<meta property="og:title" content="365 天存錢罐｜一年存 66,795 元的存錢挑戰">
+<style>
+:root{--main:#2F5D50;--sand:#D99A4E;--bg:#F7F1E7;--line:#E8E0D2;--ink:#23323D;--mute:#7A8790;--g:#2E8B57;--g2:#E3F2E9}
+*{box-sizing:border-box}html,body{margin:0}body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.6}
+button{font:inherit;cursor:pointer}
+header{background:var(--main);color:#fff;padding:22px 18px 26px;position:relative;overflow:hidden}header:after{content:"";position:absolute;right:-55px;top:-55px;width:170px;height:170px;border-radius:50%;background:var(--sand);opacity:.9}
+header>*{position:relative;z-index:1;max-width:760px;margin:0 auto}.by{font-size:12px;color:#CFE2D8;letter-spacing:1px}h1{font-size:25px;margin:4px 0}header p{margin:0;color:#DDEBE3;font-size:14px}
+main{max-width:760px;margin:0 auto;padding:16px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px}h2{font-size:18px;margin:0 0 12px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.st{background:#F7F4EE;border-radius:12px;padding:10px;text-align:center}.st .k{font-size:12px;color:var(--mute)}.st .v{font-size:20px;font-weight:900;font-variant-numeric:tabular-nums}.st.g .v{color:var(--g)}
+.bar{height:12px;background:#EFE9DF;border-radius:99px;overflow:hidden;margin:12px 0 4px}.bar div{height:100%;background:var(--g);border-radius:99px;transition:width .3s}
+.grid{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:5px}
+.c{border:1px solid var(--line);background:#FFFDF8;border-radius:8px;padding:7px 0;font-size:13px;font-variant-numeric:tabular-nums;color:var(--ink)}.c.on{background:var(--g);border-color:var(--g);color:#fff;font-weight:800}.c.pick{outline:3px solid var(--sand)}
+.btn{display:inline-block;border:0;border-radius:12px;padding:11px 16px;font-weight:800;text-decoration:none;background:var(--main);color:#fff;font-size:15px}.btn.sand{background:var(--sand);color:#2A1E10}.btn.ghost{background:#EFE9DF;color:var(--ink)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.today{background:var(--g2);border-radius:12px;padding:12px 14px;margin-top:10px;font-size:15px;display:none}.today b{font-size:22px;color:var(--g)}
+.cta{background:linear-gradient(135deg,var(--main),#3E7565);color:#fff;border:0}.cta h2{color:#fff}.cta p{margin:0 0 12px;color:#E1EEE7;font-size:14.5px}
+.note{font-size:12.5px;color:var(--mute);line-height:1.7}footer{text-align:center;font-size:12.5px;color:var(--mute);padding:6px 16px 30px}footer a{color:var(--main)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--main);color:#fff;padding:11px 18px;border-radius:12px;font-size:14px;display:none;z-index:9}
+@media(min-width:620px){.grid{grid-template-columns:repeat(15,minmax(0,1fr))}}
+@media(max-width:560px){header:after{width:120px!important;height:120px!important;right:-50px!important;top:-58px!important}header p{padding-right:30px}}
+</style>
+</head>
+<body>
+<header><div class="by">噗微微・免費實用小工具</div><h1>365 天存錢罐</h1><p>每天挑一個 1～365 的數字存進去，一年存下 66,795 元。</p></header>
+<main>
+ <section class="card">
+  <div class="stats"><div class="st"><div class="k">已存天數</div><div class="v" id="days">0</div></div><div class="st g"><div class="k">已存金額</div><div class="v" id="saved">0</div></div><div class="st"><div class="k">還差</div><div class="v" id="left">66,795</div></div></div>
+  <div class="bar"><div id="bar"></div></div><div class="note" id="pct"></div>
+  <div class="row" style="margin-top:12px"><button class="btn sand" onclick="lucky(0)">🎲 今天隨機挑一個</button><button class="btn ghost" onclick="lucky(1)">手頭緊：挑小的</button></div>
+  <div class="today" id="today"></div>
+ </section>
+ <section class="card">
+  <h2>點數字打勾（再點一次取消）</h2>
+  <div class="grid" id="grid"></div>
+ </section>
+ <section class="card">
+  <h2>怎麼玩？</h2>
+  <div class="note" style="font-size:14px">1. 準備一個存錢筒或一個專用帳戶。<br>2. 每天挑一個還沒打勾的數字，存那麼多錢進去，再回來打勾。<br>3. 順序隨你：發薪日挑大的、月底挑小的，不用照 1、2、3 排。<br>4. 365 格全部勾完，就存到 66,795 元。</div>
+ </section>
+ <section class="card cta">
+  <h2>存錢、存股一起管？</h2>
+  <p>「存股小金庫」Excel：存錢目標、52 週存錢、365 天存錢罐，加上存股股利追蹤，每月領多少股利一目了然。</p>
+  <a class="btn sand" href="https://portaly.cc/lifejuice_taiwan" target="_blank" rel="noopener">看噗微微的實用模板 →</a>
+ </section>
+ <section class="card"><div class="row" style="justify-content:space-between"><div><b>找人一起存比較撐得久</b><div class="note">分享給家人朋友一起挑戰</div></div><button class="btn ghost" onclick="share()">🔗 分享這個工具</button></div></section>
+ <p class="note">※ 打勾紀錄只存在你這支手機的瀏覽器，清除瀏覽器資料或換手機會不見。想長期保存，建議改用 Excel 版。</p>
+</main>
+<details class="a2hs" style="max-width:760px;margin:0 auto 14px;padding:0 16px"><summary style="background:#fff;border:1px solid #E8E0D2;border-radius:16px;padding:14px 18px;font-weight:800;cursor:pointer">📱 加到手機主畫面，下次一點就開</summary><div style="background:#fff;border:1px solid #E8E0D2;border-top:0;border-radius:0 0 16px 16px;padding:4px 18px 16px;font-size:14.5px;line-height:1.8;margin-top:-10px">
+<b>iPhone（Safari）</b><br>1. 用 Safari 打開這一頁<br>2. 點下方的「分享」按鈕（方框加向上箭頭）<br>3. 往下滑，點「加入主畫面」→ 右上角「新增」<br><br>
+<b>Android（Chrome）</b><br>1. 用 Chrome 打開這一頁<br>2. 點右上角「⋮」<br>3. 點「加到主畫面」或「安裝應用程式」→「新增」<br><br>
+<span style="color:#7A8790;font-size:13px">從 LINE、Facebook 點開的話，先點右上角選單「用瀏覽器開啟」，才看得到這些選項。</span></div></details>
+<footer>追蹤噗微微，每天一則實用資訊<br><a href="https://portaly.cc/lifejuice_taiwan" target="_blank" rel="noopener">抖音・Facebook・Instagram・YouTube 都在這裡</a></footer>
+<div class="toast" id="toast"></div>
+<script>
+const $=id=>document.getElementById(id);const nf=x=>Math.round(x).toLocaleString('zh-TW');
+let S=[];try{S=JSON.parse(localStorage.getItem('pu-365-v1'))||[]}catch(e){}let pick=0;
+function save(){try{localStorage.setItem('pu-365-v1',JSON.stringify(S))}catch(e){}}
+function toast(t){const e=$('toast');e.textContent=t;e.style.display='block';clearTimeout(e._t);e._t=setTimeout(()=>e.style.display='none',2200)}
+function render(){const sum=S.reduce((a,b)=>a+b,0);$('days').textContent=S.length;$('saved').textContent=nf(sum);$('left').textContent=nf(66795-sum);$('bar').style.width=(sum/66795*100)+'%';$('pct').textContent=`完成 ${(sum/66795*100).toFixed(1)}%`;
+ $('grid').innerHTML=Array.from({length:365},(_,i)=>i+1).map(n=>`<button class="c ${S.includes(n)?'on':''} ${n===pick?'pick':''}" onclick="tog(${n})">${n}</button>`).join('')}
+function tog(n){if(S.includes(n))S=S.filter(x=>x!==n);else{S.push(n);toast(`存入 ${n} 元 💪`);if(n===pick){pick=0;$('today').style.display='none'}}save();render();if(S.length===365)toast('365 天全部完成！存到 66,795 元 🎉')}
+function lucky(small){const rest=Array.from({length:365},(_,i)=>i+1).filter(n=>!S.includes(n));if(!rest.length){toast('全部完成了！');return}
+ const pool=small?rest.slice(0,Math.max(1,Math.ceil(rest.length/5))):rest;pick=pool[Math.floor(Math.random()*pool.length)];
+ $('today').style.display='block';$('today').innerHTML=`今天存 <b>${pick}</b> 元　存好後點格子裡的 <b>${pick}</b> 打勾`;render();
+ const el=document.querySelector('.c.pick');if(el)el.scrollIntoView({behavior:'smooth',block:'center'})}
+function share(){if(navigator.share)navigator.share({title:document.title,url:location.href}).catch(()=>{});else{const a=document.createElement('textarea');a.value=location.href;document.body.appendChild(a);a.select();try{document.execCommand('copy');toast('已複製網址')}catch(e){}a.remove()}}
+render();
+</script>
+</body>
+</html>

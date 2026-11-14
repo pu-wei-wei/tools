@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" href="icon-192.png"><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#2F5D50"><meta name="apple-mobile-web-app-title" content="旅遊分帳">
+<title>旅遊分帳計算機｜出去玩誰該給誰多少，一鍵算好｜噗微微</title>
+<meta name="description" content="免費旅遊分帳計算機：輸入誰付了什麼，自動算出誰該給誰多少錢，用最少次數轉帳結清，結果可以直接貼到 LINE 群組。">
+<meta property="og:title" content="旅遊分帳計算機｜誰該給誰多少，一鍵算好">
+<style>
+:root{--main:#2F5D50;--sand:#D99A4E;--bg:#F7F1E7;--line:#E8E0D2;--ink:#23323D;--mute:#7A8790;--g:#2E8B57;--g2:#E3F2E9;--r:#D0453A;--r2:#FBE6E3}
+*{box-sizing:border-box}html,body{margin:0}body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.6}
+button,input,select{font:inherit}button{cursor:pointer}
+header{background:var(--main);color:#fff;padding:22px 18px 26px;position:relative;overflow:hidden}header:after{content:"";position:absolute;right:-55px;top:-55px;width:170px;height:170px;border-radius:50%;background:var(--sand);opacity:.9}
+header>*{position:relative;z-index:1;max-width:760px;margin:0 auto}.by{font-size:12px;color:#CFE2D8;letter-spacing:1px}h1{font-size:25px;margin:4px 0}header p{margin:0;color:#DDEBE3;font-size:14px}
+main{max-width:760px;margin:0 auto;padding:16px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px}h2{font-size:18px;margin:0 0 12px}
+label{display:block;font-size:13px;color:var(--mute);font-weight:700;margin-bottom:4px}
+input,select{width:100%;padding:11px 12px;border:1px solid #DDD5C6;border-radius:10px;background:#FFFDF9;color:var(--ink);font-size:16px}input:focus,select:focus{outline:2px solid var(--sand);border-color:var(--sand)}
+.btn{display:inline-block;border:0;border-radius:12px;padding:11px 16px;font-weight:800;text-decoration:none;background:var(--main);color:#fff;font-size:15px}.btn.sand{background:var(--sand);color:#2A1E10}.btn.ghost{background:#EFE9DF;color:var(--ink)}.btn.sm{padding:6px 10px;font-size:13px;border-radius:8px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.grow{flex:1;min-width:0}
+.tag{display:inline-flex;align-items:center;gap:6px;background:#EFE9DF;border-radius:99px;padding:5px 6px 5px 12px;font-size:14px}.tag button{border:0;background:#fff;border-radius:50%;width:22px;height:22px;font-size:12px;line-height:1}
+.f{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.full{grid-column:1/-1}
+.who{display:flex;flex-wrap:wrap;gap:6px}.who label{display:flex;align-items:center;gap:5px;font-weight:400;color:var(--ink);background:#F7F4EE;border-radius:99px;padding:5px 12px;margin:0;font-size:14px}.who input{width:auto}
+.item{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px dashed var(--line);font-size:14.5px}.item:last-child{border:0}.item small{color:var(--mute);display:block}
+.pp{display:grid;grid-template-columns:1fr auto auto auto;gap:4px 12px;font-size:14.5px;align-items:center}.pp .h{font-size:12px;color:var(--mute);font-weight:700}.pp .n{text-align:right;font-variant-numeric:tabular-nums}
+.pos{color:var(--g);font-weight:800}.neg{color:var(--r);font-weight:800}
+.tr{background:var(--g2);border-radius:12px;padding:12px 14px;margin-top:8px;font-size:16px}.tr b{font-size:18px}
+.cta{background:linear-gradient(135deg,var(--main),#3E7565);color:#fff;border:0}.cta h2{color:#fff}.cta p{margin:0 0 12px;color:#E1EEE7;font-size:14.5px}
+.note{font-size:12.5px;color:var(--mute);line-height:1.7}footer{text-align:center;font-size:12.5px;color:var(--mute);padding:6px 16px 30px}footer a{color:var(--main)}
+.empty{color:var(--mute);text-align:center;padding:14px;font-size:14px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--main);color:#fff;padding:11px 18px;border-radius:12px;font-size:14px;display:none;z-index:9}
+@media(max-width:560px){header:after{width:120px!important;height:120px!important;right:-50px!important;top:-58px!important}header p{padding-right:30px}}
+</style>
+</head>
+<body>
+<header><div class="by">噗微微・免費實用小工具</div><h1>旅遊分帳計算機</h1><p>誰付了什麼記下來，自動算出誰該給誰多少，轉帳次數最少。</p></header>
+<main>
+ <section class="card">
+  <h2>① 有誰一起去？</h2>
+  <div class="row"><input id="newName" class="grow" placeholder="輸入名字，例：小美" style="flex:1"><button class="btn" onclick="addPerson()">加入</button></div>
+  <div class="row" id="people" style="margin-top:10px"></div>
+ </section>
+ <section class="card">
+  <h2>② 記一筆花費</h2>
+  <div class="f">
+   <div class="full"><label>項目</label><input id="iName" placeholder="例：民宿、晚餐、加油"></div>
+   <div><label>金額</label><input id="iAmt" type="number" inputmode="numeric" min="0" placeholder="例：6000"></div>
+   <div><label>誰先付的</label><select id="iPayer"></select></div>
+   <div class="full"><label>誰要分攤（預設全部）</label><div class="who" id="iShare"></div></div>
+  </div>
+  <div class="row" style="margin-top:12px"><button class="btn sand" onclick="addItem()">＋ 記下這筆</button></div>
+  <div id="items" style="margin-top:12px"></div>
+ </section>
+ <section class="card">
+  <h2>③ 分帳結果</h2>
+  <div id="result"><div class="empty">加入成員和花費後，這裡會算出結果</div></div>
+  <div class="row" style="margin-top:14px"><button class="btn" onclick="copyResult()">📋 複製結果貼到 LINE</button><button class="btn ghost" onclick="clearAll()">清空重來</button></div>
+ </section>
+ <section class="card cta">
+  <h2>家裡每個月也想這樣自動分帳？</h2>
+  <p>「2027 家庭記帳本」Excel：夫妻共同支出標起來，月底自動算出誰該補多少，還有月報表、支出日曆、預算警示。</p>
+  <a class="btn sand" href="https://portaly.cc/lifejuice_taiwan" target="_blank" rel="noopener">看噗微微的實用模板 →</a>
+ </section>
+ <section class="card"><div class="row" style="justify-content:space-between"><div><b>下次出遊也用得到</b><div class="note">分享給一起出去玩的朋友</div></div><button class="btn ghost" onclick="share()">🔗 分享這個工具</button></div></section>
+ <p class="note">※ 資料只存在你這支手機的瀏覽器，不會上傳。金額四捨五入到元，可能有 1 元以內的尾差。</p>
+</main>
+<details class="a2hs" style="max-width:760px;margin:0 auto 14px;padding:0 16px"><summary style="background:#fff;border:1px solid #E8E0D2;border-radius:16px;padding:14px 18px;font-weight:800;cursor:pointer">📱 加到手機主畫面，下次一點就開</summary><div style="background:#fff;border:1px solid #E8E0D2;border-top:0;border-radius:0 0 16px 16px;padding:4px 18px 16px;font-size:14.5px;line-height:1.8;margin-top:-10px">
+<b>iPhone（Safari）</b><br>1. 用 Safari 打開這一頁<br>2. 點下方的「分享」按鈕（方框加向上箭頭）<br>3. 往下滑，點「加入主畫面」→ 右上角「新增」<br><br>
+<b>Android（Chrome）</b><br>1. 用 Chrome 打開這一頁<br>2. 點右上角「⋮」<br>3. 點「加到主畫面」或「安裝應用程式」→「新增」<br><br>
+<span style="color:#7A8790;font-size:13px">從 LINE、Facebook 點開的話，先點右上角選單「用瀏覽器開啟」，才看得到這些選項。</span></div></details>
+<footer>追蹤噗微微，每天一則實用資訊<br><a href="https://portaly.cc/lifejuice_taiwan" target="_blank" rel="noopener">抖音・Facebook・Instagram・YouTube 都在這裡</a></footer>
+<div class="toast" id="toast"></div>
+<script>
+const $=id=>document.getElementById(id);const nf=x=>Math.round(x).toLocaleString('zh-TW');const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let S={people:[],items:[]};try{S=JSON.parse(localStorage.getItem('pu-split-v1'))||S}catch(e){}
+function save(){try{localStorage.setItem('pu-split-v1',JSON.stringify(S))}catch(e){}}
+function toast(t){const e=$('toast');e.textContent=t;e.style.display='block';clearTimeout(e._t);e._t=setTimeout(()=>e.style.display='none',2200)}
+function addPerson(){const n=$('newName').value.trim();if(!n)return;if(S.people.includes(n)){toast('已經有這個人了');return}S.people.push(n);$('newName').value='';save();render();$('newName').focus()}
+$('newName').addEventListener('keydown',e=>{if(e.key==='Enter')addPerson()});
+function delPerson(i){const n=S.people[i];if(S.items.some(it=>it.payer===n||it.share.includes(n))){if(!confirm(`「${n}」已經有花費紀錄，刪除會一併移除相關的分攤，確定嗎？`))return;S.items=S.items.filter(it=>it.payer!==n).map(it=>({...it,share:it.share.filter(x=>x!==n)})).filter(it=>it.share.length)}S.people.splice(i,1);save();render()}
+function addItem(){const name=$('iName').value.trim()||'未命名',amt=parseFloat($('iAmt').value),payer=$('iPayer').value;const share=[...document.querySelectorAll('#iShare input:checked')].map(i=>i.value);
+ if(S.people.length<2){toast('先加入至少 2 個人');return}if(!amt||amt<=0){toast('請輸入金額');return}if(!share.length){toast('至少選一個人分攤');return}
+ S.items.push({name,amt,payer,share});$('iName').value='';$('iAmt').value='';save();render();toast('已記下')}
+function delItem(i){S.items.splice(i,1);save();render()}
+function calc(){const bal={},paid={},cost={};S.people.forEach(p=>{bal[p]=0;paid[p]=0;cost[p]=0});
+ S.items.forEach(it=>{const each=it.amt/it.share.length;paid[it.payer]+=it.amt;it.share.forEach(p=>cost[p]+=each)});
+ S.people.forEach(p=>bal[p]=paid[p]-cost[p]);
+ const cr=S.people.filter(p=>bal[p]>0.5).map(p=>({p,v:bal[p]})).sort((a,b)=>b.v-a.v),db=S.people.filter(p=>bal[p]<-0.5).map(p=>({p,v:-bal[p]})).sort((a,b)=>b.v-a.v);
+ const tr=[];let i=0,j=0;while(i<db.length&&j<cr.length){const x=Math.min(db[i].v,cr[j].v);tr.push({from:db[i].p,to:cr[j].p,v:x});db[i].v-=x;cr[j].v-=x;if(db[i].v<0.5)i++;if(cr[j].v<0.5)j++}
+ return{paid,cost,bal,tr}}
+function render(){
+ $('people').innerHTML=S.people.length?S.people.map((p,i)=>`<span class="tag">${esc(p)}<button onclick="delPerson(${i})" aria-label="刪除">✕</button></span>`).join(''):'<span class="note">還沒有成員</span>';
+ const keep=$('iPayer').value;$('iPayer').innerHTML=S.people.map(p=>`<option>${esc(p)}</option>`).join('');if(S.people.includes(keep))$('iPayer').value=keep;
+ $('iShare').innerHTML=S.people.map(p=>`<label><input type="checkbox" value="${esc(p)}" checked>${esc(p)}</label>`).join('')||'<span class="note">先加入成員</span>';
+ const total=S.items.reduce((s,it)=>s+it.amt,0);
+ $('items').innerHTML=S.items.length?`<div class="note" style="margin-bottom:4px">共 ${S.items.length} 筆，合計 <b>${nf(total)}</b> 元</div>`+S.items.map((it,i)=>`<div class="item"><div><b>${esc(it.name)}</b><small>${esc(it.payer)} 先付・${it.share.length===S.people.length?'全部人分':esc(it.share.join('、'))+' 分'}</small></div><div class="row"><b>${nf(it.amt)}</b><button class="btn ghost sm" onclick="delItem(${i})">刪除</button></div></div>`).join(''):'';
+ if(S.people.length<2||!S.items.length){$('result').innerHTML='<div class="empty">加入成員和花費後，這裡會算出結果</div>';return}
+ const r=calc();
+ $('result').innerHTML=`<div class="pp"><span class="h">成員</span><span class="h n">先付了</span><span class="h n">該分攤</span><span class="h n">差額</span>${S.people.map(p=>`<span>${esc(p)}</span><span class="n">${nf(r.paid[p])}</span><span class="n">${nf(r.cost[p])}</span><span class="n ${r.bal[p]>0.5?'pos':r.bal[p]<-0.5?'neg':''}">${r.bal[p]>0.5?'+':''}${Math.abs(r.bal[p])<0.5?'0':nf(r.bal[p])}</span>`).join('')}</div>
+ <div style="margin-top:14px;font-weight:800">要這樣轉帳（共 ${r.tr.length} 次）：</div>${r.tr.length?r.tr.map(t=>`<div class="tr">${esc(t.from)} → ${esc(t.to)}　<b>${nf(t.v)}</b> 元</div>`).join(''):'<div class="tr">大家剛好打平，不用轉帳 🎉</div>'}`}
+function resultText(){if(S.people.length<2||!S.items.length)return'';const r=calc();const total=S.items.reduce((s,it)=>s+it.amt,0);
+ return `【旅遊分帳結果】\n總花費 ${nf(total)} 元，${S.people.length} 人\n\n`+S.items.map(it=>`・${it.name} ${nf(it.amt)}（${it.payer} 付）`).join('\n')+`\n\n👉 轉帳方式：\n`+(r.tr.length?r.tr.map(t=>`${t.from} → ${t.to}：${nf(t.v)} 元`).join('\n'):'大家打平，不用轉帳')+`\n\n用「噗微微旅遊分帳計算機」算的：${location.href}`}
+function copyText(t){const a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();let ok=false;try{ok=document.execCommand('copy')}catch(e){}a.remove();if(!ok&&navigator.clipboard)navigator.clipboard.writeText(t).then(()=>toast('已複製，可以貼到 LINE 了'));else toast(ok?'已複製，可以貼到 LINE 了':'複製失敗')}
+function copyResult(){const t=resultText();if(!t){toast('還沒有結果');return}copyText(t)}
+function clearAll(){if(confirm('確定清空全部成員和花費？')){S={people:[],items:[]};save();render()}}
+function share(){if(navigator.share)navigator.share({title:document.title,url:location.href}).catch(()=>{});else copyText(location.href)}
+render();
+</script>
+</body>
+</html>

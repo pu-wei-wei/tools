@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" href="icon-192.png"><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#2F5D50"><meta name="apple-mobile-web-app-title" content="打包清單">
+<title>行李打包清單產生器｜選目的地和天數，自動列好要帶什麼｜噗微微</title>
+<meta name="description" content="免費行李打包清單：選旅行類型、天數、有沒有帶小孩，自動產生可勾選、可列印的打包清單，出國、國內旅遊、出差都適用。">
+<meta property="og:title" content="行李打包清單產生器｜出門前一晚必用">
+<style>
+:root{--main:#2F5D50;--sand:#D99A4E;--bg:#F7F1E7;--line:#E8E0D2;--ink:#23323D;--mute:#7A8790;--g:#2E8B57;--g2:#E3F2E9}
+*{box-sizing:border-box}html,body{margin:0}body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.6}
+button,input,select{font:inherit}button{cursor:pointer}
+header{background:var(--main);color:#fff;padding:22px 18px 26px;position:relative;overflow:hidden}header:after{content:"";position:absolute;right:-55px;top:-55px;width:170px;height:170px;border-radius:50%;background:var(--sand);opacity:.9}
+header>*{position:relative;z-index:1;max-width:760px;margin:0 auto}.by{font-size:12px;color:#CFE2D8;letter-spacing:1px}h1{font-size:25px;margin:4px 0}header p{margin:0;color:#DDEBE3;font-size:14px}
+main{max-width:760px;margin:0 auto;padding:16px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px}h2{font-size:18px;margin:0 0 12px}
+label.l{display:block;font-size:13px;color:var(--mute);font-weight:700;margin-bottom:6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}.chip{border:1px solid var(--line);background:#FAF7F2;border-radius:99px;padding:7px 13px;font-size:14px;color:var(--ink)}.chip.on{background:var(--main);border-color:var(--main);color:#fff}
+.btn{display:inline-block;border:0;border-radius:12px;padding:11px 16px;font-weight:800;text-decoration:none;background:var(--main);color:#fff;font-size:15px}.btn.sand{background:var(--sand);color:#2A1E10}.btn.ghost{background:#EFE9DF;color:var(--ink)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.bar{height:10px;background:#EFE9DF;border-radius:99px;overflow:hidden;margin:8px 0 4px}.bar div{height:100%;background:var(--g);border-radius:99px}
+.cat{margin-top:14px}.cat h3{font-size:15px;margin:0 0 6px;color:var(--main)}
+.it{display:flex;align-items:center;gap:10px;padding:8px 2px;border-bottom:1px dashed var(--line);font-size:15px;cursor:pointer}.it input{width:20px;height:20px;accent-color:var(--g)}.it.done span{color:var(--mute);text-decoration:line-through}.it small{color:var(--sand);font-weight:700;margin-left:auto;white-space:nowrap}
+.cta{background:linear-gradient(135deg,var(--main),#3E7565);color:#fff;border:0}.cta h2{color:#fff}.cta p{margin:0 0 12px;color:#E1EEE7;font-size:14.5px}
+.note{font-size:12.5px;color:var(--mute);line-height:1.7}footer{text-align:center;font-size:12.5px;color:var(--mute);padding:6px 16px 30px}footer a{color:var(--main)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--main);color:#fff;padding:11px 18px;border-radius:12px;font-size:14px;display:none;z-index:9}
+@media print{header,.noprint,.cta,footer{display:none!important}body{background:#fff}.card{border:0;padding:0}.it{padding:4px 0}}
+@media(max-width:560px){header:after{width:120px!important;height:120px!important;right:-50px!important;top:-58px!important}header p{padding-right:30px}}
+</style>
+</head>
+<body>
+<header><div class="by">噗微微・免費實用小工具</div><h1>行李打包清單產生器</h1><p>選旅行類型和天數，自動列好要帶什麼，打勾就不會漏。</p></header>
+<main>
+ <section class="card noprint">
+  <h2>① 這趟是什麼旅行？</h2>
+  <label class="l">旅行類型</label><div class="chips" data-k="type"></div>
+  <label class="l">天數</label><div class="chips" data-k="days"></div>
+  <label class="l">其他（可複選）</label><div class="chips" data-k="extra" data-multi="1"></div>
+ </section>
+ <section class="card">
+  <div class="row" style="justify-content:space-between"><h2 style="margin:0" id="title">打包清單</h2><span class="note" id="count"></span></div>
+  <div class="bar noprint"><div id="bar"></div></div>
+  <div id="list"></div>
+  <div class="row noprint" style="margin-top:16px"><button class="btn" onclick="copyList()">📋 複製清單</button><button class="btn ghost" onclick="window.print()">🖨 列印</button><button class="btn ghost" onclick="resetChecks()">取消全部勾選</button></div>
+ </section>
+ <section class="card cta noprint">
+  <h2>旅費花了多少、誰該給誰？</h2>
+  <p>出遊回來用「旅遊分帳計算機」一鍵算好；家裡日常花費，用「2027 家庭記帳本」自動整理。</p>
+  <div class="row"><a class="btn sand" href="split.html">旅遊分帳計算機 →</a><a class="btn ghost" style="background:#fff" href="https://portaly.cc/lifejuice_taiwan" target="_blank" rel="noopener">看噗微微的實用模板</a></div>
+ </section>
+ <section class="card noprint"><div class="row" style="justify-content:space-between"><div><b>旅伴也需要？</b><div class="note">分享給一起出門的人</div></div><button class="btn ghost" onclick="share()">🔗 分享這個工具</button></div></section>
+ <p class="note noprint">※ 勾選紀錄只存在你這支手機的瀏覽器。出國前請另外確認目的地的入境規定、電壓插頭和行李限制，以航空公司及當地主管機關最新公告為準。</p>
+</main>
+<details class="a2hs" style="max-width:760px;margin:0 auto 14px;padding:0 16px"><summary style="background:#fff;border:1px solid #E8E0D2;border-radius:16px;padding:14px 18px;font-weight:800;cursor:pointer">📱 加到手機主畫面，下次一點就開</summary><div style="background:#fff;border:1px solid #E8E0D2;border-top:0;border-radius:0 0 16px 16px;padding:4px 18px 16px;font-size:14.5px;line-height:1.8;margin-top:-10px">
+<b>iPhone（Safari）</b><br>1. 用 Safari 打開這一頁<br>2. 點下方的「分享」按鈕（方框加向上箭頭）<br>3. 往下滑，點「加入主畫面」→ 右上角「新增」<br><br>
+<b>Android（Chrome）</b><br>1. 用 Chrome 打開這一頁<br>2. 點右上角「⋮」<br>3. 點「加到主畫面」或「安裝應用程式」→「新增」<br><br>
+<span style="color:#7A8790;font-size:13px">從 LINE、Facebook 點開的話，先點右上角選單「用瀏覽器開啟」，才看得到這些選項。</span></div></details>
+<footer class="noprint">追蹤噗微微，每天一則實用資訊<br><a href="https://portaly.cc/lifejuice_taiwan" target="_blank" rel="noopener">抖音・Facebook・Instagram・YouTube 都在這裡</a></footer>
+<div class="toast" id="toast"></div>
+<script>
+const $=id=>document.getElementById(id);
+const OPT={type:[['domestic','🚗 國內旅遊'],['city','🏙 出國城市'],['beach','🏝 海島度假'],['snow','❄ 雪地寒冷'],['biz','💼 出差']],days:[['1','1 天來回'],['2','2 天 1 夜'],['3','3～4 天'],['5','5～7 天'],['8','8 天以上']],extra:[['kids','👶 帶小孩'],['fly','✈ 搭飛機'],['camp','⛺ 露營／戶外'],['swim','🏊 會游泳／泡湯']]};
+let st={type:'city',days:'5',extra:['fly'],checked:{}};try{st=Object.assign(st,JSON.parse(localStorage.getItem('pu-pack-v1'))||{})}catch(e){}
+function save(){try{localStorage.setItem('pu-pack-v1',JSON.stringify(st))}catch(e){}}
+function toast(t){const e=$('toast');e.textContent=t;e.style.display='block';clearTimeout(e._t);e._t=setTimeout(()=>e.style.display='none',2200)}
+function nights(){return{1:0,2:1,3:3,5:6,8:9}[st.days]}
+function build(){const t=st.type,x=st.extra,N=nights(),abroad=t==='city'||t==='beach'||t==='snow'||(t==='biz'&&x.includes('fly')),C={};
+ const add=(cat,item,qty)=>{(C[cat]=C[cat]||[]).push([item,qty||''])};
+ const cl=n=>Math.max(1,Math.min(n,7));
+ // 證件金錢
+ add('📄 證件與錢','身分證');add('📄 證件與錢','健保卡');add('📄 證件與錢','現金、信用卡');
+ if(abroad){add('📄 證件與錢','護照（效期 6 個月以上）');add('📄 證件與錢','機票、住宿訂單（存手機＋截圖）');add('📄 證件與錢','外幣、海外刷卡用信用卡');add('📄 證件與錢','旅遊平安險／不便險資料')}
+ if(t==='domestic'||t==='biz')add('📄 證件與錢','車票、住宿訂單');
+ if(x.includes('kids'))add('📄 證件與錢','小孩的健保卡'+(abroad?'、護照':''));
+ // 衣物
+ if(N>0){add('👕 衣物','上衣',cl(N+1)+' 件');add('👕 衣物','褲子／裙子',cl(Math.ceil((N+1)/2))+' 件');add('👕 衣物','內衣褲、襪子',cl(N+1)+' 套');add('👕 衣物','睡衣')}
+ else add('👕 衣物','備用衣服 1 套（流汗或弄髒用）');
+ add('👕 衣物','薄外套');add('👕 衣物','好走的鞋子');
+ if(t==='snow'){add('👕 衣物','防水羽絨外套');add('👕 衣物','發熱衣褲',cl(N)+' 套');add('👕 衣物','毛帽、手套、圍巾');add('👕 衣物','防滑雪靴');add('👕 衣物','暖暖包')}
+ if(t==='beach'){add('👕 衣物','泳衣');add('👕 衣物','拖鞋或涼鞋');add('👕 衣物','遮陽帽、太陽眼鏡');add('👕 衣物','薄長袖（防曬、冷氣房）')}
+ if(t==='biz'){add('👕 衣物','正式服裝',cl(N)+' 套');add('👕 衣物','皮鞋')}
+ if(x.includes('swim')&&t!=='beach')add('👕 衣物','泳衣、泳帽');
+ // 盥洗
+ if(N>0){add('🧴 盥洗保養','牙刷、牙膏');add('🧴 盥洗保養','洗面乳、保養品（分裝）');add('🧴 盥洗保養','隱形眼鏡、藥水');add('🧴 盥洗保養','刮鬍刀／化妝品')}
+ add('🧴 盥洗保養','防曬乳');add('🧴 盥洗保養','衛生紙、濕紙巾');
+ if(t==='snow')add('🧴 盥洗保養','護唇膏、乳液（防乾裂）');
+ // 3C
+ add('🔌 3C 電子','手機、充電器、充電線');add('🔌 3C 電子','行動電源（搭機要放隨身行李）');
+ if(abroad){add('🔌 3C 電子','網卡／eSIM');add('🔌 3C 電子','轉接插頭（出發前查當地插座）')}
+ if(t==='biz')add('🔌 3C 電子','筆電、充電器、簡報轉接頭');
+ if(N>=3)add('🔌 3C 電子','延長線（多孔）');
+ // 藥品
+ add('💊 藥品','個人常備藥（慢性病藥帶足天數）');add('💊 藥品','感冒、腸胃、止痛藥');add('💊 藥品','OK 繃');
+ if(t==='beach'||x.includes('camp'))add('💊 藥品','防蚊液、止癢膏');
+ if(x.includes('fly')||t==='domestic')add('💊 藥品','暈車／暈機藥');
+ // 小孩
+ if(x.includes('kids')){add('👶 小孩','換洗衣物（比天數多 1～2 套）');add('👶 小孩','尿布、濕紙巾（需要的話）');add('👶 小孩','奶瓶、奶粉、副食品（需要的話）');add('👶 小孩','零食、水壺');add('👶 小孩','安撫玩具、繪本、平板');add('👶 小孩','小孩的常備藥、退燒藥')}
+ // 戶外
+ if(x.includes('camp')){add('⛺ 戶外','帳篷、睡袋（或確認營地租借）');add('⛺ 戶外','頭燈、手電筒');add('⛺ 戶外','雨衣');add('⛺ 戶外','垃圾袋')}
+ // 搭機
+ if(x.includes('fly')){add('✈ 搭機','隨身液體 100ml 以下分裝、放透明夾鏈袋');add('✈ 搭機','頸枕、眼罩、耳塞');add('✈ 搭機','空水壺（過安檢後裝水）');add('✈ 搭機','確認托運行李重量限制')}
+ // 其他
+ add('🎒 其他','購物袋、塑膠袋（裝髒衣服）');add('🎒 其他','雨傘');
+ if(N>=3)add('🎒 其他','小型洗衣袋、衣架');
+ return C}
+const label={type:OPT.type,days:OPT.days};
+function render(){document.querySelectorAll('.chips').forEach(box=>{const k=box.dataset.k,multi=box.dataset.multi;box.innerHTML=OPT[k].map(([v,t])=>`<button class="chip ${(multi?st[k].includes(v):st[k]===v)?'on':''}" onclick="pick('${k}','${v}')">${t}</button>`).join('')});
+ const C=build();let tot=0,done=0;
+ $('list').innerHTML=Object.entries(C).map(([cat,its])=>`<div class="cat"><h3>${cat}</h3>${its.map(([it,q])=>{const id=cat+'|'+it;const c=!!st.checked[id];tot++;if(c)done++;return`<label class="it ${c?'done':''}"><input type="checkbox" ${c?'checked':''} onchange="chk('${id.replace(/'/g,"\\'")}',this.checked)"><span>${it}</span>${q?`<small>${q}</small>`:''}</label>`}).join('')}</div>`).join('');
+ $('title').textContent=OPT.type.find(o=>o[0]===st.type)[1].slice(2)+'・'+OPT.days.find(o=>o[0]===st.days)[1]+' 打包清單';
+ $('count').textContent=`已準備 ${done} / ${tot}`;$('bar').style.width=(tot?done/tot*100:0)+'%';if(tot&&done===tot)toast('全部準備好了，出發吧 🎉')}
+function pick(k,v){if(k==='extra'){st.extra=st.extra.includes(v)?st.extra.filter(x=>x!==v):[...st.extra,v]}else st[k]=v;save();render()}
+function chk(id,c){if(c)st.checked[id]=1;else delete st.checked[id];save();render()}
+function resetChecks(){st.checked={};save();render()}
+function copyText(t){const a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();let ok=false;try{ok=document.execCommand('copy')}catch(e){}a.remove();if(!ok&&navigator.clipboard)navigator.clipboard.writeText(t).then(()=>toast('已複製'));else toast(ok?'已複製':'複製失敗')}
+function copyList(){const C=build();copyText($('title').textContent+'\n\n'+Object.entries(C).map(([cat,its])=>cat+'\n'+its.map(([i,q])=>`☐ ${i}${q?'（'+q+'）':''}`).join('\n')).join('\n\n')+`\n\n清單來自「噗微微行李打包清單」：${location.href}`)}
+function share(){if(navigator.share)navigator.share({title:document.title,url:location.href}).catch(()=>{});else copyText(location.href)}
+render();
+</script>
+</body>
+</html>
