@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>房貸提前還款試算｜每月多還多少能省多少利息？｜噗微微</title>
+<meta name="description" content="免費房貸提前還款試算：輸入剩餘本金、利率、年限，算出每月多還或一次多還能省多少利息、提早幾年還完，以及升息時月付會多繳多少。">
+<meta property="og:title" content="房貸提前還款試算｜每月多還多少能省多少利息？">
+<meta property="og:description" content="輸入房貸條件，馬上算出提前還款省下的利息和提早還完的時間。">
+<style>
+:root{--main:#2F5D50;--sand:#D99A4E;--bg:#F7F1E7;--line:#E8E0D2;--ink:#23323D;--mute:#7A8790;--g:#2E8B57;--g2:#E3F2E9;--r:#D0453A;--r2:#FBE6E3}
+*{box-sizing:border-box}html,body{margin:0}body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.6}
+button,input,select{font:inherit}button{cursor:pointer}
+header{background:var(--main);color:#fff;padding:22px 18px 26px;position:relative;overflow:hidden}
+header:after{content:"";position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;background:var(--sand);opacity:.9}
+header>*{position:relative;z-index:1;max-width:760px;margin:0 auto}
+.by{font-size:12px;color:#CFE2D8;letter-spacing:1px}h1{font-size:26px;margin:4px 0 4px;line-height:1.3}header p{margin:0;color:#DDEBE3;font-size:14px}
+main{max-width:760px;margin:0 auto;padding:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px}
+h2{font-size:18px;margin:0 0 12px}
+.f{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+label{display:block;font-size:13px;color:var(--mute);font-weight:700;margin-bottom:4px}
+input,select{width:100%;padding:11px 12px;border:1px solid #DDD5C6;border-radius:10px;background:#FFFDF9;color:var(--ink);font-size:16px}
+input:focus,select:focus{outline:2px solid var(--sand);border-color:var(--sand)}
+.hint{font-size:12.5px;color:var(--mute);margin-top:6px}
+.res{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:4px}
+.box{border-radius:14px;padding:14px;background:#F7F4EE}.box .k{font-size:12.5px;color:var(--mute)}.box .v{font-size:21px;font-weight:900;margin-top:4px;font-variant-numeric:tabular-nums}
+.box.save{background:var(--g2)}.box.save .v{color:var(--g)}
+.big{font-size:15px;margin-top:12px;background:var(--g2);color:#1E6B42;border-radius:12px;padding:12px 14px}
+table{width:100%;border-collapse:collapse;font-size:14px}th{text-align:right;color:var(--mute);font-size:12px;padding:8px 6px;border-bottom:2px solid var(--line);white-space:nowrap}th:first-child,td:first-child{text-align:left}
+td{text-align:right;padding:9px 6px;border-bottom:1px solid #F0EBE2;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pos{color:var(--g);font-weight:800}.neg{color:var(--r);font-weight:800}
+.tw{overflow-x:auto}
+.cta{background:linear-gradient(135deg,var(--main),#3E7565);color:#fff;border:0}
+.cta h2{color:#fff}.cta p{margin:0 0 12px;color:#E1EEE7;font-size:14.5px}
+.btn{display:inline-block;border:0;border-radius:12px;padding:12px 18px;font-weight:800;text-decoration:none;background:var(--sand);color:#2A1E10;font-size:15px}
+.btn.ghost{background:#EFE9DF;color:var(--ink)}.btn.w{background:#fff;color:var(--main)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.note{font-size:12.5px;color:var(--mute);line-height:1.7}
+footer{text-align:center;font-size:12.5px;color:var(--mute);padding:6px 16px 30px}footer a{color:var(--main)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--main);color:#fff;padding:11px 18px;border-radius:12px;font-size:14px;display:none;z-index:9}
+@media(max-width:560px){.res{grid-template-columns:minmax(0,1fr)}h1{font-size:23px}header:after{width:130px;height:130px;right:-55px;top:-55px}table{font-size:13px}td,th{padding:8px 4px}th:nth-child(2),td:nth-child(2){display:none}}
+</style>
+</head>
+<body>
+<header><div class="by">噗微微・免費實用小工具</div><h1>房貸提前還款試算</h1><p>每月多還一點、或一次還一筆，能省多少利息？提早幾年還完？</p></header>
+<main>
+ <section class="card">
+  <h2>① 你的房貸</h2>
+  <div class="f">
+   <div><label>剩餘本金（元）</label><input id="bal" type="number" inputmode="numeric" min="0" value="5000000"></div>
+   <div><label>年利率（%）</label><input id="rate" type="number" inputmode="decimal" min="0" max="30" step="0.001" value="2.185"></div>
+   <div><label>剩餘年數</label><input id="yrs" type="number" inputmode="decimal" min="0.5" max="50" step="0.5" value="25"></div>
+   <div><label>還款方式</label><select disabled><option>本息平均攤還</option></select></div>
+  </div>
+  <div class="hint">剩餘本金看銀行對帳單或網銀。不知道剩幾年，可以填「原本年限 − 已繳年數」。</div>
+ </section>
+ <section class="card">
+  <h2>② 想怎麼提前還</h2>
+  <div class="f">
+   <div><label>每月多還（元）</label><input id="extra" type="number" inputmode="numeric" min="0" value="10000"></div>
+   <div><label>現在一次多還（元）</label><input id="lump" type="number" inputmode="numeric" min="0" value="0"></div>
+   <div style="grid-column:1/-1"><label>一次還款後</label><select id="mode"><option value="term">月付不變，縮短年限（省比較多利息）</option><option value="pay">年限不變，降低月付（每月壓力變小）</option></select></div>
+  </div>
+ </section>
+ <section class="card">
+  <h2>③ 試算結果</h2>
+  <div class="res" id="res"></div>
+  <div class="big" id="sum"></div>
+ </section>
+ <section class="card">
+  <h2>每月多還多少，差多少？</h2>
+  <div class="tw"><table><thead><tr><th>每月多還</th><th>每月總繳</th><th>還完需要</th><th>剩餘利息</th><th>省下利息</th></tr></thead><tbody id="tbl"></tbody></table></div>
+ </section>
+ <section class="card">
+  <h2>升息或降息，月付差多少？</h2>
+  <div class="tw"><table><thead><tr><th>利率調整</th><th>調整後利率</th><th>每月繳款</th><th>每月差額</th><th>總利息差</th></tr></thead><tbody id="rt"></tbody></table></div>
+ </section>
+ <section class="card cta">
+  <h2>想一次看清全家有多少、欠多少？</h2>
+  <p>「家底管家」Excel：資產、貸款、淨資產成長曲線、財務健康燈號，每月 3 分鐘更新，這個房貸試算也在裡面。</p>
+  <div class="row"><a class="btn" href="https://portaly.cc/lifejuice_taiwan" target="_blank" rel="noopener">看噗微微的實用模板 →</a></div>
+ </section>
+ <section class="card">
+  <div class="row" style="justify-content:space-between">
+   <div><b>覺得有用？</b><div class="note">分享給也在繳房貸的家人朋友</div></div>
+   <button class="btn ghost" onclick="share()">🔗 分享這個工具</button>
+  </div>
+ </section>
+ <p class="note">※ 以本息平均攤還、利率固定、每月還款估算，金額四捨五入，實際以銀行計算為準。部分銀行在綁約期間提前還款會收違約金，請先向銀行確認。提前還款前，建議先留足 3～6 個月生活費當緊急預備金。本工具不提供貸款或投資建議。</p>
+</main>
+<footer>追蹤噗微微，每天一則實用資訊<br><a href="https://portaly.cc/lifejuice_taiwan" target="_blank" rel="noopener">抖音・Facebook・Instagram・YouTube 都在這裡</a></footer>
+<div class="toast" id="toast"></div>
+<script>
+const $=id=>document.getElementById(id);const n=id=>{const v=parseFloat($(id).value);return isNaN(v)?0:v};
+const nf=x=>Math.round(x).toLocaleString('zh-TW');
+function pmt(B,r,m){if(m<=0)return B;return r===0?B/m:B*r/(1-Math.pow(1+r,-m))}
+function nper(r,p,B){if(B<=0)return 0;if(r===0)return B/p;const x=1-B*r/p;return x<=0?Infinity:-Math.log(x)/Math.log(1+r)}
+const ym=m=>{if(!isFinite(m))return'還不完';m=Math.ceil(m-1e-9);const y=Math.floor(m/12),mm=m%12;return(y?y+' 年':'')+(mm?(y?' ':'')+mm+' 個月':'')||'0 個月'};
+function calc(){
+ const B=Math.max(0,n('bal')),r=Math.max(0,n('rate'))/1200,M=Math.max(1,Math.round(n('yrs')*12)),ex=Math.max(0,n('extra')),L=Math.min(B,Math.max(0,n('lump')));
+ const pay=pmt(B,r,M),int0=pay*M-B;
+ const B2=B-L;const pay2=$('mode').value==='pay'&&L>0?pmt(B2,r,M):pay;const np=pay2+ex;
+ const m2=B2<=0?0:nper(r,np,B2);const int2=B2<=0?0:np*m2-B2;const saveI=Math.max(0,int0-int2);
+ $('res').innerHTML=`<div class="box"><div class="k">原本</div><div class="v">${ym(M)}</div><div class="k">月付 ${nf(pay)}<br>剩餘利息 ${nf(int0)}</div></div>
+ <div class="box"><div class="k">提前還款後</div><div class="v">${ym(m2)}</div><div class="k">月付 ${nf(np)}<br>剩餘利息 ${nf(int2)}</div></div>
+ <div class="box save"><div class="k">可以省下利息</div><div class="v">${nf(saveI)} 元</div><div class="k">${M-Math.ceil(m2)>0?'提早 '+ym(M-Math.ceil(m2))+' 還完':($('mode').value==='pay'&&L>0?'月付減少 '+nf(pay-pay2)+' 元':'輸入多還金額看看')}</div></div>`;
+ $('sum').innerHTML=ex+L>0?`每月多還 <b>${nf(ex)}</b> 元${L?`、現在一次還 <b>${nf(L)}</b> 元`:''}，總共可以少付 <b>${nf(saveI)}</b> 元利息${M-Math.ceil(m2)>0?`，提早 <b>${ym(M-Math.ceil(m2))}</b> 無債一身輕`:''}。`:'在上面填「每月多還」或「一次多還」，看看能省多少。';
+ $('tbl').innerHTML=[0,3000,5000,10000,20000,30000].map(e=>{const p=pay+e,m=nper(r,p,B),i=p*m-B;return`<tr><td>${nf(e)}</td><td>${nf(p)}</td><td>${ym(m)}</td><td>${nf(i)}</td><td class="pos">${e?nf(int0-i):'—'}</td></tr>`}).join('');
+ $('rt').innerHTML=[-0.25,-0.125,0.125,0.25,0.5,1].map(d=>{const nr=Math.max(0,n('rate')+d)/1200,p=pmt(B,nr,M),diff=p-pay;return`<tr><td>${d>0?'升':'降'} ${Math.abs(d)}%</td><td>${(nr*1200).toFixed(3)}%</td><td>${nf(p)}</td><td class="${diff>0?'neg':'pos'}">${diff>0?'+':'−'}${nf(Math.abs(diff))}</td><td class="${diff>0?'neg':'pos'}">${diff>0?'+':'−'}${nf(Math.abs(diff*M))}</td></tr>`}).join('')}
+function toast(t){const e=$('toast');e.textContent=t;e.style.display='block';clearTimeout(e._t);e._t=setTimeout(()=>e.style.display='none',2200)}
+function share(){const d={title:document.title,url:location.href};if(navigator.share){navigator.share(d).catch(()=>{})}else{const a=document.createElement('textarea');a.value=location.href;document.body.appendChild(a);a.select();try{document.execCommand('copy');toast('已複製網址')}catch(e){toast(location.href)}a.remove()}}
+document.querySelectorAll('input,select').forEach(e=>e.addEventListener('input',calc));calc();
+</script>
+</body>
+</html>
