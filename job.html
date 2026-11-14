@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" href="icon-192.png"><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#2F5D50"><meta name="apple-mobile-web-app-title" content="換工作">
+<title>領完年終換工作時程檢查表｜預告期、特休、勞健保一次排好｜噗微微</title>
+<meta name="description" content="免費換工作時程檢查表：依年資算法定預告期和最晚提離職日，提醒年終發放條件、特休折算、健保不中斷、勞退專戶等注意事項。">
+<meta property="og:title" content="領完年終換工作時程檢查表｜預告期、特休、勞健保一次排好">
+<style>
+:root{--main:#2F5D50;--sand:#D99A4E;--bg:#F7F1E7;--line:#E8E0D2;--ink:#23323D;--mute:#7A8790;--g:#2E8B57;--g2:#E3F2E9;--r:#D0453A;--r2:#FBE6E3}
+*{box-sizing:border-box}html,body{margin:0}body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.6}
+button,input,select{font:inherit}button{cursor:pointer}
+header{background:var(--main);color:#fff;padding:22px 18px 26px;position:relative;overflow:hidden}header:after{content:"";position:absolute;right:-55px;top:-55px;width:170px;height:170px;border-radius:50%;background:var(--sand);opacity:.9}
+header>*{position:relative;z-index:1;max-width:760px;margin:0 auto}.by{font-size:12px;color:#CFE2D8;letter-spacing:1px}h1{font-size:25px;margin:4px 0}header p{margin:0;color:#DDEBE3;font-size:14px}
+main{max-width:760px;margin:0 auto;padding:16px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px}h2{font-size:18px;margin:0 0 12px}
+label{display:block;font-size:13px;color:var(--mute);font-weight:700;margin-bottom:4px}
+input,select{width:100%;padding:11px 12px;border:1px solid #DDD5C6;border-radius:10px;background:#FFFDF9;color:var(--ink);font-size:16px}input:focus,select:focus{outline:2px solid var(--sand);border-color:var(--sand)}
+.btn{display:inline-block;border:0;border-radius:12px;padding:11px 16px;font-weight:800;text-decoration:none;background:var(--main);color:#fff;font-size:15px}.btn.sand{background:var(--sand);color:#2A1E10}.btn.ghost{background:#EFE9DF;color:var(--ink)}.btn.sm{padding:6px 10px;font-size:13px;border-radius:8px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.grow{flex:1;min-width:0}
+.tag{display:inline-flex;align-items:center;gap:6px;background:#EFE9DF;border-radius:99px;padding:5px 6px 5px 12px;font-size:14px}.tag button{border:0;background:#fff;border-radius:50%;width:22px;height:22px;font-size:12px;line-height:1}
+.f{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.full{grid-column:1/-1}
+.who{display:flex;flex-wrap:wrap;gap:6px}.who label{display:flex;align-items:center;gap:5px;font-weight:400;color:var(--ink);background:#F7F4EE;border-radius:99px;padding:5px 12px;margin:0;font-size:14px}.who input{width:auto}
+.item{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px dashed var(--line);font-size:14.5px}.item:last-child{border:0}.item small{color:var(--mute);display:block}
+.pp{display:grid;grid-template-columns:1fr auto auto auto;gap:4px 12px;font-size:14.5px;align-items:center}.pp .h{font-size:12px;color:var(--mute);font-weight:700}.pp .n{text-align:right;font-variant-numeric:tabular-nums}
+.pos{color:var(--g);font-weight:800}.neg{color:var(--r);font-weight:800}
+.tr{background:var(--g2);border-radius:12px;padding:12px 14px;margin-top:8px;font-size:16px}.tr b{font-size:18px}
+.cta{background:linear-gradient(135deg,var(--main),#3E7565);color:#fff;border:0}.cta h2{color:#fff}.cta p{margin:0 0 12px;color:#E1EEE7;font-size:14.5px}
+.note{font-size:12.5px;color:var(--mute);line-height:1.7}footer{text-align:center;font-size:12.5px;color:var(--mute);padding:6px 16px 30px}footer a{color:var(--main)}
+.empty{color:var(--mute);text-align:center;padding:14px;font-size:14px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--main);color:#fff;padding:11px 18px;border-radius:12px;font-size:14px;display:none;z-index:9}
+@media(max-width:560px){header:after{width:120px!important;height:120px!important;right:-50px!important;top:-58px!important}header p{padding-right:30px}}
+
+label.l{display:block;font-size:13px;color:var(--mute);font-weight:700;margin:6px 0 6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}.chip{border:1px solid var(--line);background:#FAF7F2;border-radius:99px;padding:7px 13px;font-size:14px;color:var(--ink)}.chip.on{background:var(--main);border-color:var(--main);color:#fff}
+.big{font-size:30px;font-weight:900;color:var(--main);background:var(--g2);border-radius:14px;padding:14px 16px}
+.tip{background:#FBF3E4;border-radius:12px;padding:10px 14px;font-size:14px;margin-top:12px;line-height:1.7}
+.res3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.box{border-radius:14px;padding:12px;background:#F7F4EE}.box .k{font-size:12.5px;color:var(--mute)}.box .v{font-size:20px;font-weight:900;margin-top:2px}.box.save{background:var(--g2)}.box.save .v{color:var(--g)}.box.warn{background:var(--r2)}.box.warn .v{color:var(--r)}
+.src{font-size:12px;color:var(--mute);line-height:1.7}.src a{color:var(--main)}
+.tl{border-left:3px solid var(--sand);padding-left:14px;margin:8px 0 0 6px}.tl .st{position:relative;margin-bottom:14px}.tl .st:before{content:"";position:absolute;left:-22px;top:5px;width:13px;height:13px;border-radius:50%;background:var(--sand);border:2px solid #fff}
+.tl .d{font-weight:900;color:var(--main)}.ck{display:flex;gap:8px;align-items:flex-start;font-size:14.5px;padding:4px 0}.ck input{width:18px;height:18px;margin-top:3px;accent-color:var(--g);flex:none}
+@media(max-width:560px){.res3{grid-template-columns:minmax(0,1fr)}header:after{width:120px!important;height:120px!important;right:-50px!important;top:-58px!important}header p{padding-right:30px}}
+</style>
+</head>
+<body>
+<header><div class="by">噗微微・免費實用小工具</div><h1>領完年終再換工作：時程檢查表</h1><p>什麼時候提離職才不吃虧？預告期、特休、勞健保、勞退，一次排好。</p></header>
+<main>
+ <section class="card">
+  <h2>① 填你的日期</h2>
+  <div class="f">
+   <div><label>目前公司到職日</label><input id="start" type="date" value="2023-03-01"></div>
+   <div><label>年終預計入帳日</label><input id="bonus" type="date"></div>
+   <div><label>希望的最後上班日</label><input id="last" type="date"></div>
+   <div><label>新公司報到日（還不知道可空）</label><input id="newd" type="date"></div>
+  </div>
+  <div class="chips" style="margin-top:8px"><label class="ck" style="margin:0"><input type="checkbox" id="cond" checked> 年終規定「發放日當天要在職」（大多數公司是這樣）</label></div>
+ </section>
+ <section class="card">
+  <h2>② 你的關鍵日期</h2>
+  <div class="res3">
+   <div class="box"><div class="k">目前年資</div><div class="v" id="ten"></div></div>
+   <div class="box"><div class="k">法定預告期</div><div class="v" id="notice"></div></div>
+   <div class="box save"><div class="k">最晚提離職日</div><div class="v" id="latest"></div></div>
+  </div>
+  <div class="tip" id="warn"></div>
+ </section>
+ <section class="card">
+  <h2>③ 時程檢查表（可以打勾）</h2>
+  <div class="tl" id="tl"></div>
+  <div class="row" style="margin-top:12px"><button class="btn" onclick="copyResult()">📋 複製時程</button><button class="btn ghost" onclick="share()">🔗 分享給想換工作的朋友</button></div>
+ </section>
+ <section class="card cta">
+  <h2>換工作空窗期，錢夠撐嗎？</h2>
+  <p>「2027 家庭記帳本」看清每月固定支出；「家底管家」算緊急預備金能撐幾個月，換工作更安心。</p>
+  <a class="btn sand" href="https://portaly.cc/lifejuice_taiwan" target="_blank" rel="noopener">看噗微微的實用模板 →</a>
+ </section>
+ <section class="card"><h2>資料來源</h2><div class="src">
+  ・預告期間：勞動基準法第 16 條（繼續工作 3 個月以上未滿 1 年：10 日；1 年以上未滿 3 年：20 日；3 年以上：30 日），勞工自請離職依第 15 條準用<br>
+  ・特別休假與未休折算工資：勞動基準法第 38 條<br>
+  ・全民健保不可中斷，離職未立即到新公司加保，須在投保單位轉出後依規定加保（衛生福利部中央健康保險署）<br>
+  ・勞退個人專戶隨勞工移轉（勞工退休金條例）；25～65 歲沒有參加其他社會保險，會自動納入國民年金（勞動部勞工保險局）<br>
+  <b>年終發放條件依各公司規定與勞動契約；個案以主管機關最新公告為準。</b></div></section>
+</main>
+<details class="a2hs" style="max-width:760px;margin:0 auto 14px;padding:0 16px"><summary style="background:#fff;border:1px solid #E8E0D2;border-radius:16px;padding:14px 18px;font-weight:800;cursor:pointer">📱 加到手機主畫面，下次一點就開</summary><div style="background:#fff;border:1px solid #E8E0D2;border-top:0;border-radius:0 0 16px 16px;padding:4px 18px 16px;font-size:14.5px;line-height:1.8;margin-top:-10px">
+<b>iPhone（Safari）</b><br>1. 用 Safari 打開這一頁<br>2. 點下方的「分享」按鈕（方框加向上箭頭）<br>3. 往下滑，點「加入主畫面」→ 右上角「新增」<br><br>
+<b>Android（Chrome）</b><br>1. 用 Chrome 打開這一頁<br>2. 點右上角「⋮」<br>3. 點「加到主畫面」或「安裝應用程式」→「新增」<br><br>
+<span style="color:#7A8790;font-size:13px">從 LINE、Facebook 點開的話，先點右上角選單「用瀏覽器開啟」，才看得到這些選項。</span></div></details>
+<footer>追蹤噗微微，每天一則實用資訊<br><a href="https://portaly.cc/lifejuice_taiwan" target="_blank" rel="noopener">抖音・Facebook・Instagram・YouTube 都在這裡</a></footer>
+<div class="toast" id="toast"></div>
+<script>
+const $=id=>document.getElementById(id);const nf=x=>Math.round(x).toLocaleString('zh-TW');
+function toast(t){const e=$('toast');e.textContent=t;e.style.display='block';clearTimeout(e._t);e._t=setTimeout(()=>e.style.display='none',2200)}
+function copyText(t){const a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();let ok=false;try{ok=document.execCommand('copy')}catch(e){}a.remove();if(!ok&&navigator.clipboard)navigator.clipboard.writeText(t).then(()=>toast('已複製'));else toast(ok?'已複製':'複製失敗')}
+function share(){if(navigator.share)navigator.share({title:document.title,url:location.href}).catch(()=>{});else copyText(location.href)}
+const D=s=>s?new Date(s+'T00:00:00'):null;const fmt=d=>d?`${d.getMonth()+1}/${d.getDate()}（${'日一二三四五六'[d.getDay()]}）`:'—';const add=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
+(function init(){const y=new Date().getFullYear();const b=new Date(y+1,0,25),l=new Date(y+1,1,28);const iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');$('bonus').value=iso(b);$('last').value=iso(l)})();
+function tenure(st,at){let m=(at.getFullYear()-st.getFullYear())*12+at.getMonth()-st.getMonth();if(at.getDate()<st.getDate())m--;return Math.max(0,m)}
+function noticeDays(m){return m<3?0:m<12?10:m<36?20:30}
+function annualLeave(m){if(m<6)return 0;if(m<12)return 3;const y=Math.floor(m/12);if(y<2)return 7;if(y<3)return 10;if(y<5)return 14;if(y<10)return 15;return Math.min(30,15+(y-9))}
+let checks={};
+function calc(){const st=D($('start').value),bo=D($('bonus').value),la=D($('last').value),nw=D($('newd').value);if(!st||!la)return null;
+ const m=tenure(st,la),nd=noticeDays(m),latest=add(la,-nd),al=annualLeave(m);
+ const warn=[];if(bo&&$('cond').checked&&la<bo)warn.push(`⚠ 最後上班日在年終入帳日（${fmt(bo)}）之前，可能拿不到年終。建議最後上班日排在入帳日之後。`);
+ if(bo&&latest<bo)warn.push(`💡 你最晚要在 ${fmt(latest)} 提離職，比年終入帳早。很多公司規定「發放日要在職」，提了離職但還在職通常仍會發，但有些公司規定不同，<b>先看清楚員工手冊或年終發放辦法</b>。`);
+ else if(bo)warn.push(`✅ 年終 ${fmt(bo)} 入帳、確認收到後再提離職，還來得及在 ${fmt(latest)} 前提出。`);
+ if(nw&&nw<=la)warn.push('⚠ 新公司報到日早於或等於最後上班日，會重疊，請和新舊公司協調。');
+ let gap=0;if(nw&&nw>la){gap=Math.round((nw-la)/864e5)-1}
+ if(gap>0)warn.push(`📅 空窗期約 ${gap} 天：這段時間勞健保要自己處理，看下面時程。`);
+ return{st,bo,la,nw,m,nd,latest,al,gap,warn}}
+function steps(c){const S=[];const ck=(t)=>t;
+ S.push([`現在～${fmt(c.bo||c.latest)}`,'提離職之前',['確認年終發放辦法：發放日要不要在職、有沒有考績條件','新公司 offer 拿到「書面」再提（薪資、報到日、試用期）','查勞退專戶餘額、確認公司有提繳 6%（勞保局 App）',`算一下特休：依年資今年約有 ${c.al} 天，可以排休或離職時折算工資`,'檢查勞動契約有沒有競業禁止、保密條款、最低服務年限']]);
+ if(c.bo)S.push([fmt(c.bo),'年終入帳',['確認存摺入帳金額正確','截圖或留存薪資單']]);
+ S.push([fmt(c.latest)+' 前',`提出離職（預告 ${c.nd} 天）`,['用 Email 或書面提出，留下紀錄','和主管約定最後上班日、交接清單','確認特休怎麼處理：排休用完，或最後一個月折算工資']]);
+ S.push([fmt(c.la),'最後上班日',['交接完成、歸還公司物品','索取「離職證明／服務證明書」','確認最後一期薪資、特休折算、加班費的發放日','勞健保會在離職日由公司退保']]);
+ if(c.gap>0)S.push([`${fmt(add(c.la,1))}～${fmt(add(c.nw,-1))}`,`空窗期 ${c.gap} 天`,['健保不能斷：到戶籍地區公所加保，或依附在家人名下當眷屬','勞保：沒有加保時，25～65 歲會自動納入國民年金；想續保勞保可以考慮加入職業工會','勞退專戶會跟著你，不用處理','自己提離職通常不能請失業給付（那是非自願離職才有）']]);
+ if(c.nw)S.push([fmt(c.nw),'新公司報到',['確認新公司當天加保勞健保、提繳勞退','如果之前在區公所加健保，記得辦理轉出','重新申請勞退自提（自提不會自動延續）']]);
+ return S}
+function render(){const c=calc();if(!c){$('tl').innerHTML='<div class="note">請先填到職日和最後上班日</div>';return}
+ const y=Math.floor(c.m/12),mm=c.m%12;$('ten').textContent=(y?y+' 年 ':'')+mm+' 個月';$('notice').textContent=c.nd?c.nd+' 天':'不用預告';$('latest').textContent=fmt(c.latest);
+ $('warn').innerHTML=c.warn.join('<br>');
+ $('tl').innerHTML=steps(c).map(([d,t,items],i)=>`<div class="st"><div class="d">${d}</div><div style="font-weight:800;margin-bottom:4px">${t}</div>${items.map((it,j)=>{const id=i+'-'+j;return`<label class="ck"><input type="checkbox" ${checks[id]?'checked':''} onchange="checks['${id}']=this.checked"><span>${it}</span></label>`}).join('')}</div>`).join('')}
+function copyResult(){const c=calc();if(!c)return;copyText('【換工作時程】\n'+steps(c).map(([d,t,items])=>`${d}｜${t}\n`+items.map(x=>'☐ '+x).join('\n')).join('\n\n')+`\n\n用「噗微微換工作時程檢查表」排的：${location.href}\n（個案以主管機關最新公告為準）`)}
+document.querySelectorAll('input').forEach(e=>e.addEventListener('input',render));render();
+</script>
+</body>
+</html>

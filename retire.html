@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" href="icon-192.png"><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#2F5D50"><meta name="apple-mobile-web-app-title" content="退休試算">
+<title>退休金試算｜勞保年金＋勞退，退休每月能領多少？｜噗微微</title>
+<meta name="description" content="免費退休金試算：輸入年齡、月薪、勞保年資和勞退專戶，算出勞保老年年金、勞退月領和每月缺口，2026 年最新規定。">
+<meta property="og:title" content="退休金試算｜勞保年金＋勞退，退休每月能領多少？">
+<style>
+:root{--main:#2F5D50;--sand:#D99A4E;--bg:#F7F1E7;--line:#E8E0D2;--ink:#23323D;--mute:#7A8790;--g:#2E8B57;--g2:#E3F2E9;--r:#D0453A;--r2:#FBE6E3}
+*{box-sizing:border-box}html,body{margin:0}body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.6}
+button,input,select{font:inherit}button{cursor:pointer}
+header{background:var(--main);color:#fff;padding:22px 18px 26px;position:relative;overflow:hidden}header:after{content:"";position:absolute;right:-55px;top:-55px;width:170px;height:170px;border-radius:50%;background:var(--sand);opacity:.9}
+header>*{position:relative;z-index:1;max-width:760px;margin:0 auto}.by{font-size:12px;color:#CFE2D8;letter-spacing:1px}h1{font-size:25px;margin:4px 0}header p{margin:0;color:#DDEBE3;font-size:14px}
+main{max-width:760px;margin:0 auto;padding:16px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px}h2{font-size:18px;margin:0 0 12px}
+label{display:block;font-size:13px;color:var(--mute);font-weight:700;margin-bottom:4px}
+input,select{width:100%;padding:11px 12px;border:1px solid #DDD5C6;border-radius:10px;background:#FFFDF9;color:var(--ink);font-size:16px}input:focus,select:focus{outline:2px solid var(--sand);border-color:var(--sand)}
+.btn{display:inline-block;border:0;border-radius:12px;padding:11px 16px;font-weight:800;text-decoration:none;background:var(--main);color:#fff;font-size:15px}.btn.sand{background:var(--sand);color:#2A1E10}.btn.ghost{background:#EFE9DF;color:var(--ink)}.btn.sm{padding:6px 10px;font-size:13px;border-radius:8px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.grow{flex:1;min-width:0}
+.tag{display:inline-flex;align-items:center;gap:6px;background:#EFE9DF;border-radius:99px;padding:5px 6px 5px 12px;font-size:14px}.tag button{border:0;background:#fff;border-radius:50%;width:22px;height:22px;font-size:12px;line-height:1}
+.f{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.full{grid-column:1/-1}
+.who{display:flex;flex-wrap:wrap;gap:6px}.who label{display:flex;align-items:center;gap:5px;font-weight:400;color:var(--ink);background:#F7F4EE;border-radius:99px;padding:5px 12px;margin:0;font-size:14px}.who input{width:auto}
+.item{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px dashed var(--line);font-size:14.5px}.item:last-child{border:0}.item small{color:var(--mute);display:block}
+.pp{display:grid;grid-template-columns:1fr auto auto auto;gap:4px 12px;font-size:14.5px;align-items:center}.pp .h{font-size:12px;color:var(--mute);font-weight:700}.pp .n{text-align:right;font-variant-numeric:tabular-nums}
+.pos{color:var(--g);font-weight:800}.neg{color:var(--r);font-weight:800}
+.tr{background:var(--g2);border-radius:12px;padding:12px 14px;margin-top:8px;font-size:16px}.tr b{font-size:18px}
+.cta{background:linear-gradient(135deg,var(--main),#3E7565);color:#fff;border:0}.cta h2{color:#fff}.cta p{margin:0 0 12px;color:#E1EEE7;font-size:14.5px}
+.note{font-size:12.5px;color:var(--mute);line-height:1.7}footer{text-align:center;font-size:12.5px;color:var(--mute);padding:6px 16px 30px}footer a{color:var(--main)}
+.empty{color:var(--mute);text-align:center;padding:14px;font-size:14px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--main);color:#fff;padding:11px 18px;border-radius:12px;font-size:14px;display:none;z-index:9}
+@media(max-width:560px){header:after{width:120px!important;height:120px!important;right:-50px!important;top:-58px!important}header p{padding-right:30px}}
+
+label.l{display:block;font-size:13px;color:var(--mute);font-weight:700;margin:6px 0 6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}.chip{border:1px solid var(--line);background:#FAF7F2;border-radius:99px;padding:7px 13px;font-size:14px;color:var(--ink)}.chip.on{background:var(--main);border-color:var(--main);color:#fff}
+.big{font-size:30px;font-weight:900;color:var(--main);background:var(--g2);border-radius:14px;padding:14px 16px}
+.tip{background:#FBF3E4;border-radius:12px;padding:10px 14px;font-size:14px;margin-top:12px;line-height:1.7}
+.res3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.box{border-radius:14px;padding:12px;background:#F7F4EE}.box .k{font-size:12.5px;color:var(--mute)}.box .v{font-size:20px;font-weight:900;margin-top:2px}.box.save{background:var(--g2)}.box.save .v{color:var(--g)}.box.warn{background:var(--r2)}.box.warn .v{color:var(--r)}
+.src{font-size:12px;color:var(--mute);line-height:1.7}.src a{color:var(--main)}
+.tl{border-left:3px solid var(--sand);padding-left:14px;margin:8px 0 0 6px}.tl .st{position:relative;margin-bottom:14px}.tl .st:before{content:"";position:absolute;left:-22px;top:5px;width:13px;height:13px;border-radius:50%;background:var(--sand);border:2px solid #fff}
+.tl .d{font-weight:900;color:var(--main)}.ck{display:flex;gap:8px;align-items:flex-start;font-size:14.5px;padding:4px 0}.ck input{width:18px;height:18px;margin-top:3px;accent-color:var(--g);flex:none}
+@media(max-width:560px){.res3{grid-template-columns:minmax(0,1fr)}header:after{width:120px!important;height:120px!important;right:-50px!important;top:-58px!important}header p{padding-right:30px}}
+</style>
+</head>
+<body>
+<header><div class="by">噗微微・免費實用小工具</div><h1>退休金試算</h1><p>勞保年金＋勞退專戶，退休後每月大概能領多少？還差多少要自己準備？</p></header>
+<main>
+ <section class="card">
+  <h2>① 基本資料</h2>
+  <div class="f">
+   <div><label>現在幾歲</label><input id="age" type="number" inputmode="numeric" min="18" max="70" value="35"></div>
+   <div><label>打算幾歲退休</label><input id="rage" type="number" inputmode="numeric" min="45" max="75" value="65"></div>
+   <div><label>目前月薪（元）</label><input id="sal" type="number" inputmode="numeric" min="0" value="45000"></div>
+   <div><label>退休後每月想要的生活費</label><input id="need" type="number" inputmode="numeric" min="0" value="40000"></div>
+  </div>
+ </section>
+ <section class="card">
+  <h2>② 勞保（老年年金）</h2>
+  <div class="f">
+   <div><label>目前勞保年資（年）</label><input id="lyrs" type="number" inputmode="decimal" min="0" max="50" value="10"></div>
+   <div><label>勞保請領年齡</label><select id="lage"><option value="60">60 歲（減 20%）</option><option value="61">61 歲（減 16%）</option><option value="62">62 歲（減 12%）</option><option value="63">63 歲（減 8%）</option><option value="64">64 歲（減 4%）</option><option value="65" selected>65 歲（全額）</option><option value="66">66 歲（加 4%）</option><option value="67">67 歲（加 8%）</option><option value="68">68 歲（加 12%）</option><option value="69">69 歲（加 16%）</option><option value="70">70 歲（加 20%）</option></select></div>
+   <div class="full"><label>最高 60 個月平均投保薪資（不知道就用月薪，上限 45,800）</label><input id="ins" type="number" inputmode="numeric" min="0" placeholder="留空＝用月薪估"></div>
+  </div>
+  <div class="note" style="margin-top:6px">年資算到你打算退休那年。勞保年資未滿 15 年不能領年金，只能一次領。</div>
+ </section>
+ <section class="card">
+  <h2>③ 勞退新制（個人專戶）</h2>
+  <div class="f">
+   <div><label>專戶目前累積（元）</label><input id="bal" type="number" inputmode="numeric" min="0" value="300000"></div>
+   <div><label>自己自提</label><select id="self"><option value="0">0%</option><option value="1">1%</option><option value="2">2%</option><option value="3">3%</option><option value="4">4%</option><option value="5">5%</option><option value="6" selected>6%</option></select></div>
+   <div><label>雇主提繳</label><select id="emp"><option value="6" selected>6%（法定最低）</option><option value="7">7%</option><option value="8">8%</option><option value="10">10%</option></select></div>
+   <div><label>假設年報酬</label><select id="ret"><option value="1.5">1.5%（保守）</option><option value="3" selected>3%</option><option value="5">5%</option></select></div>
+  </div>
+  <div class="note" style="margin-top:6px">專戶餘額可以在「勞保局 e 化服務」或勞保局 App 查。勞退滿 60 歲就能請領，跟勞保 65 歲是分開的。</div>
+ </section>
+ <section class="card">
+  <h2>④ 試算結果（未計物價上漲）</h2>
+  <div class="res3">
+   <div class="box"><div class="k" id="kL">勞保年金每月</div><div class="v" id="vL"></div></div>
+   <div class="box"><div class="k">勞退每月（分 20 年領）</div><div class="v" id="vR"></div></div>
+   <div class="box" id="gapBox"><div class="k">每月缺口</div><div class="v" id="vG"></div></div>
+  </div>
+  <div class="big" id="sum" style="font-size:15.5px;font-weight:400;color:#1E6B42;margin-top:12px"></div>
+  <div class="tip" id="tips"></div>
+  <div class="row" style="margin-top:12px"><button class="btn" onclick="copyResult()">📋 複製結果</button><button class="btn ghost" onclick="share()">🔗 分享給同事</button></div>
+ </section>
+ <section class="card cta">
+  <h2>缺口要自己補，從現在開始存</h2>
+  <p>「存股小金庫」Excel：股利追蹤、存錢目標、存股試算，看見每月被動收入一格一格長大。</p>
+  <a class="btn sand" href="https://portaly.cc/lifejuice_taiwan" target="_blank" rel="noopener">看噗微微的實用模板 →</a>
+ </section>
+ <section class="card"><h2>資料來源</h2><div class="src">
+  ・勞保老年年金：平均月投保薪資 × 年資 × 1.55%，或 × 0.775% ＋ 3,000 元，擇優發給；法定請領年齡 2026 年起為 65 歲，每提前 1 年減 4%、延後 1 年加 4%，最多 20%（勞動部勞工保險局）<br>
+  ・2026 年勞保投保薪資最高級距 45,800 元；基本工資 29,500 元（勞動部，2026 年 1 月 1 日起）<br>
+  ・勞退新制：雇主提繳不低於工資 6%，勞工可自提 1%～6%，滿 60 歲可請領（勞工退休金條例）<br>
+  ・官方試算：<a href="https://www.bli.gov.tw" target="_blank" rel="noopener">勞動部勞工保險局 www.bli.gov.tw</a><br>
+  <b>本工具為簡化估算，個案以主管機關最新公告為準。</b></div></section>
+ <p class="note">※ 勞退月領實際依勞動部公告的平均餘命與利率計算，這裡以分 20 年、利率 1.1473% 估算；未計物價上漲、勞保年金通膨調整與稅費。結果僅供規劃參考，不是投資建議。</p>
+</main>
+<details class="a2hs" style="max-width:760px;margin:0 auto 14px;padding:0 16px"><summary style="background:#fff;border:1px solid #E8E0D2;border-radius:16px;padding:14px 18px;font-weight:800;cursor:pointer">📱 加到手機主畫面，下次一點就開</summary><div style="background:#fff;border:1px solid #E8E0D2;border-top:0;border-radius:0 0 16px 16px;padding:4px 18px 16px;font-size:14.5px;line-height:1.8;margin-top:-10px">
+<b>iPhone（Safari）</b><br>1. 用 Safari 打開這一頁<br>2. 點下方的「分享」按鈕（方框加向上箭頭）<br>3. 往下滑，點「加入主畫面」→ 右上角「新增」<br><br>
+<b>Android（Chrome）</b><br>1. 用 Chrome 打開這一頁<br>2. 點右上角「⋮」<br>3. 點「加到主畫面」或「安裝應用程式」→「新增」<br><br>
+<span style="color:#7A8790;font-size:13px">從 LINE、Facebook 點開的話，先點右上角選單「用瀏覽器開啟」，才看得到這些選項。</span></div></details>
+<footer>追蹤噗微微，每天一則實用資訊<br><a href="https://portaly.cc/lifejuice_taiwan" target="_blank" rel="noopener">抖音・Facebook・Instagram・YouTube 都在這裡</a></footer>
+<div class="toast" id="toast"></div>
+<script>
+const $=id=>document.getElementById(id);const nf=x=>Math.round(x).toLocaleString('zh-TW');
+function toast(t){const e=$('toast');e.textContent=t;e.style.display='block';clearTimeout(e._t);e._t=setTimeout(()=>e.style.display='none',2200)}
+function copyText(t){const a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();let ok=false;try{ok=document.execCommand('copy')}catch(e){}a.remove();if(!ok&&navigator.clipboard)navigator.clipboard.writeText(t).then(()=>toast('已複製'));else toast(ok?'已複製':'複製失敗')}
+function share(){if(navigator.share)navigator.share({title:document.title,url:location.href}).catch(()=>{});else copyText(location.href)}
+const v=id=>{const x=parseFloat($(id).value);return isNaN(x)?0:x};
+function calc(){const age=v('age'),ra=Math.max(age,v('rage')),sal=v('sal'),need=v('need'),yrsLeft=Math.max(0,ra-age);
+ const insRaw=$('ins').value?v('ins'):sal;const ins=Math.min(45800,Math.max(29500,insRaw));
+ const ly=v('lyrs')+yrsLeft;const lage=+$('lage').value;const adj=1+(lage-65)*0.04;
+ const A=ins*ly*0.00775+3000,B=ins*ly*0.0155;let lab=0,lump=0;const ok15=ly>=15;
+ if(ok15)lab=Math.max(A,B)*adj;else lump=ins*Math.min(ly,60);
+ const wage=Math.min(150000,sal),rate=(v('self')+v('emp'))/100,mc=wage*rate,r=v('ret')/100/12;
+ const toRetire=Math.max(0,Math.max(60,ra)-age)*12;
+ const fv=v('bal')*Math.pow(1+r,toRetire)+(r===0?mc*toRetire:mc*((Math.pow(1+r,toRetire)-1)/r));
+ const i=0.011473/12,n=240;const mr=fv*i/(1-Math.pow(1+i,-n));
+ const income=lab+mr;const gap=Math.max(0,need-income);
+ const gapYears=Math.max(0,90-ra);const needFund=gap*12*gapYears;
+ const yrs=Math.max(1,ra-age);const rr=0.04/12,m=yrs*12;const perMonth=needFund? needFund*rr/(Math.pow(1+rr,m)-1):0;
+ const selfTax=sal*v('self')/100*12;
+ return{age,ra,ly,lage,ins,lab,lump,ok15,fv,mr,income,gap,needFund,perMonth,yrs,gapYears,selfTax,need,adj}}
+function render(){const c=calc();
+ $('kL').textContent=c.ok15?`勞保年金每月（${c.lage} 歲起）`:'勞保（年資未滿 15 年）';
+ $('vL').textContent=c.ok15?nf(c.lab)+' 元':'一次領約 '+nf(c.lump);
+ $('vR').textContent=nf(c.mr)+' 元';
+ $('vG').textContent=c.gap>0?nf(c.gap)+' 元':'沒有缺口 🎉';$('gapBox').className='box '+(c.gap>0?'warn':'save');
+ $('sum').innerHTML=`${c.ra} 歲退休時，勞保年資約 <b>${c.ly.toFixed(0)}</b> 年，勞退專戶約 <b>${nf(c.fv)}</b> 元。<br>每月大約能領 <b>${nf(c.income)}</b> 元${c.gap>0?`，離生活費 ${nf(c.need)} 元每月還差 <b>${nf(c.gap)}</b> 元。<br>若要撐到 90 歲，需要自己準備約 <b>${(c.needFund/1e4).toFixed(0)} 萬</b>；從現在起 ${c.yrs} 年，每月存約 <b>${nf(c.perMonth)}</b> 元（假設年報酬 4%）。`:'，已經夠支應你設定的生活費。'}`;
+ const t=[];if(!c.ok15)t.push('勞保年資未滿 15 年，只能一次領；多累積年資到 15 年以上，才能月領年金。');
+ if(v('self')===0)t.push(`勞退自提 6% 可以從當年度所得扣除，等於省稅又多存退休金，而且有保證收益（不低於 2 年期定存利率）。`);
+ else t.push(`你一年自提約 ${nf(c.selfTax)} 元，這筆可以從綜合所得總額中扣除。`);
+ if(c.ra<65&&c.lage>c.ra)t.push(`${c.ra} 歲退休到 ${c.lage} 歲領勞保之間，有幾年要靠勞退和存款過生活。`);
+ t.push('換工作時勞退專戶會跟著你，不會歸零；勞保年資也會累計，中間別讓勞保斷太久。');
+ $('tips').innerHTML='💡 '+t.join('<br>💡 ')}
+function copyResult(){const c=calc();copyText(`【我的退休金試算】\n${c.ra} 歲退休，每月約領 ${nf(c.income)} 元（勞保 ${c.ok15?nf(c.lab):'一次領'}＋勞退 ${nf(c.mr)}）\n${c.gap>0?`每月缺口 ${nf(c.gap)} 元，現在起每月要多存約 ${nf(c.perMonth)} 元`:'沒有缺口'}\n\n用「噗微微退休金試算」算的：${location.href}\n（簡化估算，個案以主管機關最新公告為準）`)}
+document.querySelectorAll('input,select').forEach(e=>e.addEventListener('input',render));render();
+</script>
+</body>
+</html>
